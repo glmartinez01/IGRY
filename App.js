@@ -3,6 +3,7 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import MovieListScreen from "./src/screens/MovieListScreen";
 import searchResults from "./src/screens/searchResults";
+import gameInfoScreen from "./src/screens/gameInfoScreen"
 
 const Stack = createStackNavigator();
 
@@ -12,6 +13,7 @@ export default function App(){
         <Stack.Navigator>
           <Stack.Screen name = "Lista de Juegos" component={MovieListScreen}/>
           <Stack.Screen name = "searchResults" component={searchResults}/>
+          <Stack.Screen name = "gameInfoScreen" component={gameInfoScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
   )

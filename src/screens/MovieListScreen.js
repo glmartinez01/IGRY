@@ -3,6 +3,7 @@ import {Dimensions, FlatList, StyleSheet,Text, View,Image} from "react-native";
 import { Spinner,Button, Container, Form, Body,H1,Header,Input,Item, Left, Right,Icon,Card,CardItem, H3, Thumbnail } from "native-base";
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
+import { TouchableOpacity } from "react-native-gesture-handler";
 //import timeStamp from "../../timestamp";
 //import * as Crypto from 'expo-crypto';
 
@@ -76,22 +77,24 @@ const MovieListScreen = ({navigation}) => {
                     renderItem={({item}) => {
                         return(
                             <View>
-                                <Card>
-                                    <CardItem cardBody>
-                                            <Body style={{alignItems:"flex-start"}}>
-                                                
-                                                <Image 
-                                                    source = { 
+                                <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen")}>
+                                    <Card>
+                                        <CardItem cardBody>
+                                                <Body style={{alignItems:"flex-start"}}>
+                                                    
+                                                    <Image 
+                                                        source = { 
 
-                                                            item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`}): require("../../assets/control.jpg")
-        
-                                                    } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
-                                                <H3>{item.name}</H3>
-                                                <Text>Rating: {item.rating}</Text>
-                                            </Body>
-                                        
-                                    </CardItem>
-                                </Card>
+                                                                item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`}): require("../../assets/control.jpg")
+            
+                                                        } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
+                                                    <H3>{item.name}</H3>
+                                                    <Text>Rating: {item.rating}</Text>
+                                                </Body>
+                                            
+                                        </CardItem>
+                                    </Card>
+                                </TouchableOpacity>
                             </View>
                         )
                     }
