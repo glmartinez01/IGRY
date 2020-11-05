@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {StyleSheet,Image} from "react-native";
+import {StyleSheet,Image,Dimensions} from "react-native";
 import {Content, H1, Text,View,Spinner, Body} from "native-base";
 import getEnvVars from "../../environment";
 import backend from "../api/backend";
+import { log } from "react-native-reanimated";
 
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
+const {width, height} = Dimensions.get("window");
 
 const gameInfoScreen = ({route,navigation}) => {
 
     const {name,id} = route.params;
-    const [games,setGames] = useState(null);
+    const [game,setGame] = useState(null);
     const [error,setError] = useState(false);
 
     const getGameInfo = async () =>{
@@ -22,7 +24,7 @@ const gameInfoScreen = ({route,navigation}) => {
                     
                             
                 });
-                setGames(response.data);
+                setGame(response.data);
                 //{console.log(response.data)};
             } catch (error) {
                 setError(true);
@@ -38,7 +40,7 @@ const gameInfoScreen = ({route,navigation}) => {
 
     },[])
 
-    if(!games){
+    if(!game){
         return(
             <View style={{flex:1,justifyContent:"center"}}>
                 <Spinner color="blue"/>
@@ -49,11 +51,10 @@ const gameInfoScreen = ({route,navigation}) => {
 
     return(
         <Content>
-            <H1>{name}</H1>
-           
-            <Text>{games.summary}</Text>            
-            <Image source={games.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${games.cover.image_id}.jpg`}): require("../../assets/control.jpg") }
+            <H1>{name}</H1>    
+            <Image source={game[0].cover ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].cover.image_id}.jpg`}): require("../../assets/control.jpg") }
                     style = {styles.gameCover}/>
+            <Text style={{alignContent:"center"}}>{game[0].summary?game[0].summary:`Description not available!`}</Text>  
         </Content>
 
     );
@@ -63,13 +64,14 @@ const styles = StyleSheet.create({
 
     gameCover:{
         flex:1,
-        width: 70,
-        height:50,
+        width: width*0.99,
+        height:height*0.5,
         resizeMode:"contain"
     },
     ImageNotFound:{
         width : 70,
-        height: 50
+        height: 50,
+        resizeMode:"contain"
     },
 
 });

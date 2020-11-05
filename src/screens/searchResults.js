@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {StyleSheet,View,Text,Dimensions} from "react-native";
 import { Container, H1,Spinner,Card,CardItem,Body,H3,Thumbnail, Left } from "native-base";
 import backend from "../api/backend";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import getEnvVars from "../../environment"
 
 const {width, height} = Dimensions.get("window");
@@ -54,22 +54,24 @@ const searchResults = ({route,navigation}) => {
                renderItem={({item}) =>{
                    return(
                         <View>
-                            <Card>
-                                <CardItem cardBody>
-                                        <Left>
-                                            <Thumbnail 
-                                                source = { 
+                            <TouchableOpacity onPress ={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
+                                <Card>
+                                    <CardItem cardBody>
+                                            <Left>
+                                                <Thumbnail 
+                                                    source = { 
 
-                                                        item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`}): require("../../assets/control.jpg")
+                                                            item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`}): require("../../assets/control.jpg")
 
-                                                } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
-                                            <Body style={{alignItems:"flex-start"}}>
-                                                <H3>{item.name}</H3>
-                                                <Text>Rating: {item.rating}</Text>
-                                            </Body>
-                                        </Left>
-                                </CardItem>
-                            </Card>
+                                                    } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
+                                                <Body style={{alignItems:"flex-start"}}>
+                                                    <H3>{item.name}</H3>
+                                                    <Text>Rating: {item.rating}</Text>
+                                                </Body>
+                                            </Left>
+                                    </CardItem>
+                                </Card>
+                            </TouchableOpacity>
                         </View>
                    )
                }}

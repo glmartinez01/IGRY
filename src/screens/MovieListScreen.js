@@ -58,6 +58,7 @@ const MovieListScreen = ({navigation}) => {
     return( 
         <Container> 
                 <Header searchBar>
+                    
                     <Item>
                         <Input placeholder = "Buscar" value={search} onChangeText={setSearch}/>
                     </Item>
