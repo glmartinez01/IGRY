@@ -63,7 +63,7 @@ const MovieListScreen = ({navigation}) => {
                         <Input placeholder = "Buscar" value={search} onChangeText={setSearch}/>
                     </Item>
                     <Right>
-                        <Button icon onPress={() => {navigation.navigate('searchResults',{search})}}>
+                        <Button icon onPress={() => { search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}>
                             <Icon name="search"/>
                         </Button>
                     </Right>
