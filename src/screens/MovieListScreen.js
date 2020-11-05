@@ -77,7 +77,7 @@ const MovieListScreen = ({navigation}) => {
                     renderItem={({item}) => {
                         return(
                             <View>
-                                <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen")}>
+                                <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
                                     <Card>
                                         <CardItem cardBody>
                                                 <Body style={{alignItems:"flex-start"}}>
