@@ -16,7 +16,7 @@ const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 
 //Variable que contiene la pantalla renderizar
 
-const MovieListScreen = () => {
+const MovieListScreen = ({navigation}) => {
 
     const [games,setGames] = useState(null);
     const [error,setError] = useState(false);
@@ -61,12 +61,12 @@ const MovieListScreen = () => {
                         <Input placeholder = "Buscar" value={search} onChangeText={setSearch}/>
                     </Item>
                     <Right>
-                        <Button>
+                        <Button icon onPress={() => {navigation.navigate('searchResults',{search})}}>
                             <Icon name="search"/>
                         </Button>
                     </Right>
                 </Header>
-                <H1 style ={{marginTop:20}}>Lista de Juegos</H1>
+                
                 
                 <FlatList
                     data={games}
@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
     },
     ImageNotFound:{
         width : width*0.99,
-        height:height*0.5
+        height:height*0.5,
+        resizeMode:"contain"
     },
     
 })
