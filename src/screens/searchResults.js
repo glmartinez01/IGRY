@@ -44,7 +44,7 @@ const searchResults = ({route,navigation}) => {
     }
 
     return(
-        <Container style={{backgroundColor:'#4b0252'}}>
+        <Container style={{backgroundColor:'#ffffd1'}}>
             
             <FlatList 
                data={games}
@@ -56,7 +56,7 @@ const searchResults = ({route,navigation}) => {
                         <View>
                             <TouchableOpacity onPress ={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
                                 <Card>
-                                    <CardItem cardBody style={{flex:1,height:100,backgroundColor:'#fffbe8'}}>
+                                    <CardItem cardBody style={{flex:1,height:100,backgroundColor:'#1c2134'}}>
                                             <Left>
                                                 <Thumbnail 
                                                     source = { 
@@ -65,7 +65,7 @@ const searchResults = ({route,navigation}) => {
 
                                                     } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
                                                 <Body style={{alignItems:"flex-start"}}>
-                                                    <H3 style={{color:'#000000'}}>{item.name}</H3>
+                                                    <H3 style={{color:'#ffffff'}}>{item.name}</H3>
                                                     
                                                 </Body>
                                             </Left>

@@ -5,7 +5,7 @@ import MovieListScreen from "./src/screens/MovieListScreen";
 import searchResults from "./src/screens/searchResults";
 import gameInfoScreen from "./src/screens/gameInfoScreen";
 import {Button,Icon} from "native-base";
-import {StatusBar} from "react-native";
+
 
 const Stack = createStackNavigator();
 
@@ -17,8 +17,8 @@ export default function App(){
           <Stack.Screen name = "Lista de Juegos" component={MovieListScreen} options={{
 
             headerStyle:{
-              backgroundColor:'#63169c',
-              borderBottomColor:'#65089e',
+              backgroundColor:'#1c2134',
+              
             },
             headerTintColor: '#ffffff',
             headerTitleStyle: {
@@ -26,12 +26,9 @@ export default function App(){
             },
             headerTitleAlign:'center',
             headerLeft: () => (
-              <Button
-                onPress={() => alert('This is a button!')}
-                icon="search"
-                color='#ffffff'
-
-              />
+              <Button icon onPress={()=> {alert('Hola')}} style={{backgroundColor:'#1c2134'}}>
+                <Icon name="list"/>
+              </Button>
             ),
 
           }}/>
@@ -41,12 +38,16 @@ export default function App(){
             headerTitleAlign:'center',
             headerTintColor:'#ffffff',
             headerStyle:{
-              backgroundColor:'#63169c',
-              borderBottomColor:'#65089e',
+              backgroundColor:'#1c2134',
+              
             },
 
           }}/>
-          <Stack.Screen name = "gameInfoScreen" component={gameInfoScreen}/>
+          <Stack.Screen name = "gameInfoScreen" component={gameInfoScreen} options={{
+
+              title:"Información",
+              headerTitleAlign:"center"
+          }}/>
         </Stack.Navigator>
       </NavigationContainer>
   )

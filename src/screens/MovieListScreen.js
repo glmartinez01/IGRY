@@ -4,6 +4,7 @@ import { Spinner,Button, Container, Form, Body,H1,Header,Input,Item, Left, Right
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { ceil } from "react-native-reanimated";
 //import timeStamp from "../../timestamp";
 //import * as Crypto from 'expo-crypto';
 
@@ -57,17 +58,17 @@ const MovieListScreen = ({navigation}) => {
 
     return( 
         
-        <Container style={{backgroundColor:'#490373'}}> 
+        <Container style={{backgroundColor:'#ffffd1'}}> 
                 
-                <StatusBar backgroundColor='#63169c'/>
+                <StatusBar hidden={true}/>
                 
-                <Header searchBar rounded style={{backgroundColor:'#530482'}}>
+                <Header searchBar rounded style={{backgroundColor:'#1c2134'}}>
                     
                     <Item>
                         <Input placeholder = "Buscar" value={search} onChangeText={setSearch}/>
                     </Item>
                     <Right>
-                        <Button style={{backgroundColor:'#45016e'}} icon onPress={() => { search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}>
+                        <Button style={{backgroundColor:'#0d4b56'}} icon onPress={() => { search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}>
                             <Icon name="search"/>
                         </Button>
                     </Right>
@@ -75,17 +76,18 @@ const MovieListScreen = ({navigation}) => {
                 
                 
                 <FlatList
+                    style={{borderRadius:1}}
                     data={games}
                     keyExtractor={(item)=>item.id}
                     ListEmptyComponent={<Text>No se han encontrado juegos!</Text>}
 
                     renderItem={({item}) => {
                         return(
-                            <View>
+                            <View style={{flex:1, alignItems:"center"}}>
                                 <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
-                                    <Card>
-                                        <CardItem cardBody>
-                                                <Body style={{alignItems:"flex-start"}}>
+                                    <Card style={{ width:width*0.85,alignContent:"center"}}>
+                                        <CardItem cardBody >
+                                                <Body style={{alignItems:"center",backgroundColor:'#1c2134'}}>
                                                     
                                                     <Image 
                                                         source = { 
@@ -93,8 +95,8 @@ const MovieListScreen = ({navigation}) => {
                                                                 item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`}): require("../../assets/control.jpg")
             
                                                         } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
-                                                    <H3>{item.name}</H3>
-                                                    <Text>Rating: {item.rating}</Text>
+                                                    <H3 style={{color:'#ffffff'}}>{item.name}</H3>
+                                                    
                                                 </Body>
                                             
                                         </CardItem>
@@ -121,9 +123,10 @@ const styles = StyleSheet.create({
     },
     gameCover:{
         flex:1,
-        width: width*0.99,
+        width: width*0.85,
         height:height*0.5,
-        resizeMode:"contain"
+        resizeMode:"contain",
+        
     },
     searchInput:{
         flex:1,
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
         marginRight:15
     },
     ImageNotFound:{
-        width : width*0.99,
+        width : width*0.8,
         height:height*0.5,
         resizeMode:"contain"
     },
