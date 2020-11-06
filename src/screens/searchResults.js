@@ -44,8 +44,8 @@ const searchResults = ({route,navigation}) => {
     }
 
     return(
-        <Container>
-            <H1>Resultados de la Busqueda: {search}</H1>
+        <Container style={{backgroundColor:'#4b0252'}}>
+            
             <FlatList 
                data={games}
                keyExtractor={(item)=>item.id}
@@ -56,7 +56,7 @@ const searchResults = ({route,navigation}) => {
                         <View>
                             <TouchableOpacity onPress ={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
                                 <Card>
-                                    <CardItem cardBody>
+                                    <CardItem cardBody style={{flex:1,height:100,backgroundColor:'#fffbe8'}}>
                                             <Left>
                                                 <Thumbnail 
                                                     source = { 
@@ -65,8 +65,8 @@ const searchResults = ({route,navigation}) => {
 
                                                     } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
                                                 <Body style={{alignItems:"flex-start"}}>
-                                                    <H3>{item.name}</H3>
-                                                    <Text>Rating: {item.rating}</Text>
+                                                    <H3 style={{color:'#000000'}}>{item.name}</H3>
+                                                    
                                                 </Body>
                                             </Left>
                                     </CardItem>
@@ -88,8 +88,9 @@ const searchResults = ({route,navigation}) => {
 const styles = StyleSheet.create({
 
     gameCover:{
+        
         width: 70,
-        height:50,
+        height:70,
         resizeMode:"contain"
     },
     ImageNotFound:{

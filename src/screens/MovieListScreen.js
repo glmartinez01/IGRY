@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Dimensions, FlatList, StyleSheet,Text, View,Image} from "react-native";
+import {Dimensions, FlatList, StyleSheet,Text, View,Image,StatusBar} from "react-native";
 import { Spinner,Button, Container, Form, Body,H1,Header,Input,Item, Left, Right,Icon,Card,CardItem, H3, Thumbnail } from "native-base";
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
@@ -56,14 +56,18 @@ const MovieListScreen = ({navigation}) => {
     }
 
     return( 
-        <Container> 
-                <Header searchBar>
+        
+        <Container style={{backgroundColor:'#490373'}}> 
+                
+                <StatusBar backgroundColor='#63169c'/>
+                
+                <Header searchBar rounded style={{backgroundColor:'#530482'}}>
                     
                     <Item>
                         <Input placeholder = "Buscar" value={search} onChangeText={setSearch}/>
                     </Item>
                     <Right>
-                        <Button icon onPress={() => { search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}>
+                        <Button style={{backgroundColor:'#45016e'}} icon onPress={() => { search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}>
                             <Icon name="search"/>
                         </Button>
                     </Right>
