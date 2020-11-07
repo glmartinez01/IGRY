@@ -6,14 +6,13 @@ import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 //import timeStamp from "../../timestamp";
-//import * as Crypto from 'expo-crypto';
+
 
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 //var ts = 1;//new Date().getTime();
 //const ts = Number(new Date());
 //var message = ts.toString()+privKey+apiKey;
-//const hash = Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.MD5,message);
 
 
 //Variable que contiene la pantalla renderizar

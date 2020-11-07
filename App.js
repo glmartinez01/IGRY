@@ -5,10 +5,11 @@ import MovieListScreen from "./src/screens/MovieListScreen";
 import searchResults from "./src/screens/searchResults";
 import gameInfoScreen from "./src/screens/gameInfoScreen";
 import genresScreen from "./src/screens/genresScreen";
-import {Button,Icon} from "native-base";
-import { AntDesign,MaterialIcons } from '@expo/vector-icons';
+import {Image} from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { color } from "react-native-reanimated";
+
+
 
 let names = "";
 const Stack = createStackNavigator();
@@ -44,7 +45,9 @@ export default function App(){
         
         <Stack.Navigator>
           <Stack.Screen name = "Home" component={drawer} options={{
-            title:`API`,
+            
+            title:'API',
+
             headerStyle:{
               backgroundColor:'#1c2134',
               
@@ -56,7 +59,11 @@ export default function App(){
             headerTitleAlign:'center',
             
             headerLeft: () => (
-              <MaterialIcons name="videogame-asset" size={35} color='#ffffff' style={{marginLeft:10}}/>
+              <Image
+                
+                style={{margin:10, width: 60, resizeMode:"contain"}}
+                source={require('./assets/logo.png')}
+              />
             ),
 
           }}/>
@@ -72,7 +79,11 @@ export default function App(){
           }}/>
           <Stack.Screen name = "gameInfoScreen" component={gameInfoScreen} options={{
               title:"Información",
-              headerTitleAlign:"center"
+              headerTitleAlign:"center",
+              headerTintColor:'#ffffff',
+              headerStyle:{
+              backgroundColor:'#1c2134',
+            },
           }}/>
         </Stack.Navigator>
       </NavigationContainer>
