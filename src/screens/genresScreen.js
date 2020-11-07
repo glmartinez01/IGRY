@@ -21,7 +21,7 @@ const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 
 
-const genresScreen = () => {
+const genresScreen = ({navigation}) => {
 
     const [genres,setGenres] = useState(null);
     const [error,setError] = useState(false);
@@ -59,11 +59,10 @@ const genresScreen = () => {
     }
 
     return(
-        <Container>
+        <Container style={{backgroundColor:'#000022'}}>
             <FlatList
                         
                         numColumns={2}
-                        style={{borderRadius:1}}
                         data={genres}
                         keyExtractor={(item)=>item.id}
                         ListEmptyComponent={<Text>No se han encontrado generos!</Text>}
@@ -71,12 +70,12 @@ const genresScreen = () => {
                         renderItem={({item}) => {
                             return(
                                 <View>
-                                    <TouchableOpacity>
-                                        <Card style={{width:width*0.49}}>
-                                            <CardItem style={{justifyContent:"center",alignItems:"center"}}>
-                                                    <H3 >{item.name}</H3>
+                                    <TouchableOpacity onPress={()=> navigation.navigate("gamesbygenreScreen",{id:item.id})}>
+                                        <Card style={{width:width*0.49,borderColor:'#000000',backgroundColor:'#000022'}}>
+                                            <CardItem style={{justifyContent:"center",alignItems:"center",backgroundColor:"#007a7c",borderRadius:0}}>
+                                                    <H3 style={{color:'#ffffff'}}>{item.name}</H3>
                                             </CardItem>
-                                            <CardItem cardBody>
+                                            <CardItem cardBody style={{backgroundColor:"#0d4b56",borderRadius:0}}>
                                                 <Body style={{justifyContent:"center",alignItems:"center"}}>
                                                     <Image
                                                         

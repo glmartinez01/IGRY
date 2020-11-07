@@ -17,7 +17,7 @@ const gameInfoScreen = ({route,navigation}) => {
     const getGameInfo = async () =>{
         try {
             try {
-                const response = await backend.get(`games/?fields=screenshots.*,summary,cover.*&search=${name}`,{
+                const response = await backend.get(`games/?fields=screenshots.*,summary,cover.*,rating&search=${name}`,{
     
                     headers:{   'Client-ID':`${apiKey}`,
                                 'Authorization':`${apiAuthorization}`},

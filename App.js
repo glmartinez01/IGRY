@@ -5,6 +5,7 @@ import MovieListScreen from "./src/screens/MovieListScreen";
 import searchResults from "./src/screens/searchResults";
 import gameInfoScreen from "./src/screens/gameInfoScreen";
 import genresScreen from "./src/screens/genresScreen";
+import gamesbygenreScreen from "./src/screens/gamesbygenreScreen";
 import {Image} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -79,6 +80,14 @@ export default function App(){
           }}/>
           <Stack.Screen name = "gameInfoScreen" component={gameInfoScreen} options={{
               title:"Información",
+              headerTitleAlign:"center",
+              headerTintColor:'#ffffff',
+              headerStyle:{
+              backgroundColor:'#1c2134',
+            },
+          }}/>
+          <Stack.Screen name = "gamesbygenreScreen" component={gamesbygenreScreen} options={{
+              title:"API",
               headerTitleAlign:"center",
               headerTintColor:'#ffffff',
               headerStyle:{
