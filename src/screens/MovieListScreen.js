@@ -26,7 +26,7 @@ const MovieListScreen = ({navigation}) => {
 
     const getGames = async() => {
         try {
-            const response = await backend.get(`?fields=name,rating,cover.*`,{
+            const response = await backend.get(`games/?fields=name,rating,cover.*`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
@@ -37,7 +37,7 @@ const MovieListScreen = ({navigation}) => {
 
         } catch (error) {
             setError(true);
-            
+            {console.log(error)};
         }
         
     }
@@ -66,7 +66,7 @@ const MovieListScreen = ({navigation}) => {
                         <Item style={{backgroundColor:'#1c2134'}}>
                             <Icon name="search" style={{color: '#b9da00'}}/>
                             <Input placeholder="Buscar" value={search} onChangeText={setSearch} placeholderTextColor={'#b9da00'} style={{color:'#b9da00'}}/>
-                            <AntDesign name="rightcircle" size={24} style={{color: '#b9da00'}} onPress={() => { search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}/>
+                            <AntDesign name="rightcircle" size={24} style={{color: '#b9da00'}} onPress={() => { Keyboard.dismiss(), search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}/>
                         </Item>
                     </Header>
                     

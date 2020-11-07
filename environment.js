@@ -6,7 +6,7 @@ const ENV = {
 
         apiKey: "09202mxdctwxx7nnzpd1jt9p1mgxfq",
         apiAuthorization: "Bearer frefjyp97udjwq50ubue49vp9ofguu",
-        apiUrl: "https://api.igdb.com/v4/games/",
+        apiUrl: "https://api.igdb.com/v4/",
         apiImageUrl:"https://images.igdb.com/igdb/image/upload/",
         apiImageSize:"t_cover_big/"
        

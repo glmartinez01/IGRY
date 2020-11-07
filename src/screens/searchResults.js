@@ -16,7 +16,7 @@ const searchResults = ({route,navigation}) => {
 
     const getSearchGames = async () => {
         try {
-            const response = await backend.get(`?fields=name,rating,cover.*&search=${search}`,{
+            const response = await backend.get(`games/?fields=name,rating,cover.*&search=${search}`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
