@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from "react";
-import {Header,Container, View,Spinner} from "native-base";
-import { Text,Dimensions } from "react-native";
+import {Header,Container, View,Spinner,Card,CardItem,Body, Thumbnail, Left, H3 } from "native-base";
+import { Text,Dimensions,FlatList,Image } from "react-native";
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
+const array = [
+    "./assets/",
+    "./assets/",
+    "./assets/",
+    "./assets/",
+    "./assets/",
+    "./assets/",
+    "./assets/",
+    "./assets/",
+    "./assets/",
+    "./assets/"  
+];
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 
@@ -47,9 +60,39 @@ const genresScreen = () => {
 
     return(
         <Container>
-            <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
-                <Text>Pantalla de Generos</Text>
-            </View>
+            <FlatList
+                        
+                        numColumns={2}
+                        style={{borderRadius:1}}
+                        data={genres}
+                        keyExtractor={(item)=>item.id}
+                        ListEmptyComponent={<Text>No se han encontrado generos!</Text>}
+
+                        renderItem={({item}) => {
+                            return(
+                                <View>
+                                    <TouchableOpacity>
+                                        <Card style={{width:width*0.49}}>
+                                            <CardItem style={{justifyContent:"center",alignItems:"center"}}>
+                                                    <H3 >{item.name}</H3>
+                                            </CardItem>
+                                            <CardItem cardBody>
+                                                <Body style={{justifyContent:"center",alignItems:"center"}}>
+                                                    <Image
+                                                        
+                                                        source={require('../../assets/logo.png')}
+                                                        style={{width:50,resizeMode:'contain'}}
+                                                        />
+                                                </Body>
+                                            </CardItem>
+                                            
+                                        </Card>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        }
+                        }
+                    />
         </Container>
 
     );
