@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {Dimensions, FlatList, StyleSheet,Text, View,Image,StatusBar} from "react-native";
-import { Spinner,Button, Container, Form, Body,H1,Header,Input,Item, Left, Right,Icon,Card,CardItem, H3, Thumbnail } from "native-base";
+import {Dimensions, FlatList, StyleSheet,Text, View,Image,StatusBar,Keyboard} from "react-native";
+import { Spinner,Button, Container, Body,Header,Input,Item,Right,Icon,Left,Card,CardItem, H3, Thumbnail} from "native-base";
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { ceil } from "react-native-reanimated";
+import { AntDesign } from '@expo/vector-icons';
 //import timeStamp from "../../timestamp";
 //import * as Crypto from 'expo-crypto';
 
@@ -57,58 +57,65 @@ const MovieListScreen = ({navigation}) => {
     }
 
     return( 
-        
-        <Container style={{backgroundColor:'#ffffd1'}}> 
-                
-                <StatusBar hidden={true}/>
-                
-                <Header searchBar rounded style={{backgroundColor:'#1c2134'}}>
+       
+            <Container style={{backgroundColor:'#ffffd1'}}> 
                     
-                    <Item>
-                        <Input placeholder = "Buscar" value={search} onChangeText={setSearch}/>
-                    </Item>
-                    <Right>
-                        <Button style={{backgroundColor:'#0d4b56'}} icon onPress={() => { search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}>
-                            <Icon name="search"/>
-                        </Button>
-                    </Right>
-                </Header>
-                
-                
-                <FlatList
-                    style={{borderRadius:1}}
-                    data={games}
-                    keyExtractor={(item)=>item.id}
-                    ListEmptyComponent={<Text>No se han encontrado juegos!</Text>}
+                    <StatusBar hidden={true}/>
+                    
+                    <Header searchBar rounded style={{backgroundColor:'#1c2134'}}>
+                        <Item style={{backgroundColor:'#1c2134'}}>
+                            <Icon name="search" style={{color: '#b9da00'}}/>
+                            <Input placeholder="Buscar" value={search} onChangeText={setSearch} placeholderTextColor={'#b9da00'} style={{color:'#b9da00'}}/>
+                            <AntDesign name="rightcircle" size={24} style={{color: '#b9da00'}} onPress={() => { search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}/>
+                        </Item>
+                    </Header>
+                    
+                    
+                    <FlatList
+                        style={{borderRadius:1}}
+                        data={games}
+                        keyExtractor={(item)=>item.id}
+                        ListEmptyComponent={<Text>No se han encontrado juegos!</Text>}
 
-                    renderItem={({item}) => {
-                        return(
-                            <View style={{flex:1, alignItems:"center"}}>
-                                <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
-                                    <Card style={{ width:width*0.85,alignContent:"center"}}>
-                                        <CardItem cardBody >
-                                                <Body style={{alignItems:"center",backgroundColor:'#1c2134'}}>
-                                                    
-                                                    <Image 
-                                                        source = { 
+                        renderItem={({item}) => {
+                            return(
+                                <View style={{flex:1, alignItems:"center"}}>
+                                    <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
+                                        <Card style={{ width:width*0.85,alignContent:"center"}}>
+                                            <CardItem style={{backgroundColor:'#1c2134'}}>
+                                                <Left>
+                                                    <Thumbnail source = {item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
+                                                                : require("../../assets/control1.png")}
+                                                                style={{resizeMode:'contain'}}
+                                                    />
+                                                    <Body>
+                                                        <H3 style={{color:'#ffffff'}}>{item.name}</H3>
+                                                    </Body>
+                                                </Left>
+                                            </CardItem>
+                                            <CardItem cardBody >
+                                                    <Body style={{alignItems:"center",backgroundColor:'#1c2134'}}>
+                                                        
+                                                        <Image 
+                                                            source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
+                                                            : require("../../assets/control1.png")}
+                                                            style={item.cover ? styles.gameCover : styles.ImageNotFound}
+                                                        />
+                                                        
+                                                        
+                                                    </Body>
+                                                
+                                            </CardItem>
+                                        </Card>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        }
+                        }
+                    />
 
-                                                                item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`}): require("../../assets/control.jpg")
-            
-                                                        } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
-                                                    <H3 style={{color:'#ffffff'}}>{item.name}</H3>
-                                                    
-                                                </Body>
-                                            
-                                        </CardItem>
-                                    </Card>
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    }
-                    }
-                />
-
-        </Container>
+            </Container>
+        
         );
 };
 

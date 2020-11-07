@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {StyleSheet,View,Text,Dimensions} from "react-native";
-import { Container, H1,Spinner,Card,CardItem,Body,H3,Thumbnail, Left } from "native-base";
+import { Container, H1,Spinner,Card,CardItem,Body,H3,Thumbnail, Left, Button } from "native-base";
 import backend from "../api/backend";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import getEnvVars from "../../environment"
@@ -47,23 +47,24 @@ const searchResults = ({route,navigation}) => {
         <Container style={{backgroundColor:'#ffffd1'}}>
             
             <FlatList 
+               
                data={games}
                keyExtractor={(item)=>item.id}
-               ListEmptyComponent={<Text>No se han encontrado juegos!</Text>}
+               ListEmptyComponent=  {!games.length>=1 ? alert('No se encontraron resultados!') : <View></View>}
 
                renderItem={({item}) =>{
                    return(
                         <View>
                             <TouchableOpacity onPress ={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
-                                <Card>
+                                <Card style={{borderColor:'black'}}>
                                     <CardItem cardBody style={{flex:1,height:100,backgroundColor:'#1c2134'}}>
                                             <Left>
                                                 <Thumbnail 
-                                                    source = { 
-
-                                                            item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`}): require("../../assets/control.jpg")
-
-                                                    } style={item.cover ? styles.gameCover : styles.ImageNotFound}/>
+                                                        source = { 
+                                                        item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
+                                                        : require("../../assets/control.jpg")}
+                                                        style={item.cover ? styles.gameCover : styles.ImageNotFound}
+                                                />
                                                 <Body style={{alignItems:"flex-start"}}>
                                                     <H3 style={{color:'#ffffff'}}>{item.name}</H3>
                                                     
@@ -97,6 +98,14 @@ const styles = StyleSheet.create({
         width : 70,
         height: 50
     },
+    contentNotFound:{
+        flex:1,
+        justifyContent:"center",
+        alignItems:"center",
+        textAlign:"center",
+        color:'#ffffff'
+    },  
+
 
 });
 

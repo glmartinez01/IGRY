@@ -5,6 +5,7 @@ import MovieListScreen from "./src/screens/MovieListScreen";
 import searchResults from "./src/screens/searchResults";
 import gameInfoScreen from "./src/screens/gameInfoScreen";
 import {Button,Icon} from "native-base";
+import { AntDesign } from '@expo/vector-icons';
 
 
 const Stack = createStackNavigator();
@@ -14,8 +15,8 @@ export default function App(){
     
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name = "Lista de Juegos" component={MovieListScreen} options={{
-
+          <Stack.Screen name = "gameList" component={MovieListScreen} options={{
+            title:'Lista de Juegos',
             headerStyle:{
               backgroundColor:'#1c2134',
               
@@ -27,7 +28,7 @@ export default function App(){
             headerTitleAlign:'center',
             headerLeft: () => (
               <Button icon onPress={()=> {alert('Hola')}} style={{backgroundColor:'#1c2134'}}>
-                <Icon name="list"/>
+                <AntDesign name="bars" size={35} color='#b9da00' style={{marginLeft:10}}/>
               </Button>
             ),
 
@@ -44,7 +45,6 @@ export default function App(){
 
           }}/>
           <Stack.Screen name = "gameInfoScreen" component={gameInfoScreen} options={{
-
               title:"Información",
               headerTitleAlign:"center"
           }}/>
