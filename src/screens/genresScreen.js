@@ -6,16 +6,16 @@ import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const array = [
-    "./assets/",
-    "./assets/",
-    "./assets/",
-    "./assets/",
-    "./assets/",
-    "./assets/",
-    "./assets/",
-    "./assets/",
-    "./assets/",
-    "./assets/"  
+    "./assets/Iconos/fighting.png",
+    "./assets/Iconos/shooter.png",
+    "./assets/Iconos/Music.png",
+    "./assets/Iconos/Platform.png",
+    "./assets/Iconos/Puzzle.png",
+    "./assets/Iconos/Racing.png",
+    "./assets/Iconos/Strategy.png",
+    "./assets/Iconos/RPG.png",
+    "./assets/Iconos/SIM.png",
+    "./assets/Iconos/Sport.png"  
 ];
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
@@ -79,8 +79,8 @@ const genresScreen = ({navigation}) => {
                                                 <Body style={{justifyContent:"center",alignItems:"center"}}>
                                                     <Image
                                                         
-                                                        source={require('../../assets/logo.png')}
-                                                        style={{width:50,resizeMode:'contain'}}
+                                                        source={array.map(require)}
+                                                        style={{width:50,resizeMode:'contain',margin:20}}
                                                         />
                                                 </Body>
                                             </CardItem>
