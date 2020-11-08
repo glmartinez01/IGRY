@@ -18,18 +18,9 @@ const gamesbygenreScreen=({route,navigation})=>{
 
     const getGamesGenres = async() => {
         try {
-            const response = await backend.post(`games/`,
-                {   
-                    data:{
-                                "fields name,cover,genre;":
-                                "where genre = 4;",
-
-                        }
-                },
-                
+            const response = await backend.get(`games/?fields=name,genre`,
                 {
                     headers:{   
-                                'Accept': 'application/json',
                                 'Client-ID':`${apiKey}`,
                                 'Authorization':`${apiAuthorization}`
                             }, 

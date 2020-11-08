@@ -102,7 +102,7 @@ const genresScreen = ({navigation}) => {
                         renderItem={({item}) => {
                             return(
                                 <View>
-                                    <TouchableOpacity onPress={()=> navigation.navigate("gamesbygenreScreen",{id:item.id})}>
+                                    <TouchableOpacity onPress={()=> navigation.navigate("gamesbygenreScreen",{id:item.id, name:item.name})}>
                                         <Card style={{width:width*0.49,borderColor:'#000000',backgroundColor:'#000022'}}>
                                             <CardItem style={{justifyContent:"center",alignItems:"center",backgroundColor:"#007a7c",borderRadius:0}}>
                                                     <H3 style={{color:'#ffffff'}}>{item.name}</H3>

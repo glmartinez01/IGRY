@@ -10,9 +10,6 @@ import {Image} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-
-
-let names = "";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -45,9 +42,11 @@ export default function App(){
       <NavigationContainer>
         
         <Stack.Navigator>
-          <Stack.Screen name = "Home" component={drawer} options={{
+          <Stack.Screen name = "Home" component={drawer} options={
             
-            title:'видео игра',
+            ({ route }) => ({
+
+            title:'API',
 
             headerStyle:{
               backgroundColor:'#1c2134',
@@ -61,13 +60,13 @@ export default function App(){
             
             headerLeft: () => (
               <Image
-                
                 style={{margin:10, width: 60, resizeMode:"contain"}}
                 source={require('./assets/logo.png')}
               />
             ),
 
-          }}/>
+          })}
+          />
           <Stack.Screen name = "searchResults" component={searchResults} options={{
 
             title:'Resultados',
@@ -90,8 +89,7 @@ export default function App(){
             ({ route }) => ({
               headerStyle:{
                 backgroundColor:'#1c2134'},
-                title:"Solo hay dos Generos",
-                // title: route.params.name,
+                title: route.params.name,
                 headerTintColor: "#fff",
                 headerTitleAlign:"center"
               })

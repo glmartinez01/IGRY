@@ -32,13 +32,11 @@ const MovieListScreen = ({navigation}) => {
                         
             });
             setGames(response.data);
-            
-
         } catch (error) {
             setError(true);
-            {console.log(error)};
+            throw error;
         }
-        {console.log(response.data)}
+        
         
     }
 

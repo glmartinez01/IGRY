@@ -53,12 +53,12 @@ const gameInfoScreen = ({route,navigation}) => {
         <Content style={{backgroundColor:'#0d4b56'}}>
             <View style={{alignItems:"center"}}>
                 <Card style={{ borderColor:'#0b0d14',width:width*0.95,alignItems:"center",justifyContent:"center"}}>
-                    <CardItem style={{height:height*0.35,backgroundColor:'#1c2134'}}>
+                    <CardItem style={{height:height*0.35,backgroundColor:'#1c2134',borderRadius:0}}>
                         
                         <Image source={game[0].screenshots ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].screenshots[0].image_id}.jpg`}): require("../../assets/control1.png") }
                                 style = {styles.gameCover} />
                     </CardItem>
-                    <CardItem style={{backgroundColor:'#007a7c'}}>
+                    <CardItem style={{backgroundColor:'#007a7c',borderRadius:0}}>
                         <Left>
                             <Thumbnail source={game[0].cover ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].cover.image_id}.jpg`}): require("../../assets/control1.png") }
                                         style = {styles.gameThumbnail} />
