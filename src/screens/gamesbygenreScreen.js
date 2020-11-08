@@ -22,7 +22,7 @@ const gamesbygenreScreen=({route,navigation})=>{
                 {   
                     data:{
                                 "fields name,cover,genre;":
-                                "where genre = 5;",
+                                "where genre = 4;",
 
                         }
                 },
@@ -37,7 +37,7 @@ const gamesbygenreScreen=({route,navigation})=>{
                         
             );
             setGamesGenre(response.data);
-            {console.log(response.data)}
+            //{console.log(response.data)}
         } catch (error) {
             setError(true);
             {console.log(error)};
@@ -52,8 +52,8 @@ const gamesbygenreScreen=({route,navigation})=>{
 
     if(!gamesgenre){
         return(
-            <View style={{flex:1,justifyContent:"center"}}>
-                <Spinner color="blue"/>
+            <View style={{flex:1,justifyContent:"center", alignItems:"center"}}>
+                <Image source = {require('../../assets/splash.gif')} style={{height: 200 }}/>
             </View>
         )
     }

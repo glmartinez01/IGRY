@@ -38,6 +38,7 @@ const MovieListScreen = ({navigation}) => {
             setError(true);
             {console.log(error)};
         }
+        {console.log(response.data)}
         
     }
 
@@ -49,8 +50,8 @@ const MovieListScreen = ({navigation}) => {
 
     if(!games){
         return(
-            <View style={{flex:1,justifyContent:"center"}}>
-                <Spinner color="blue"/>
+            <View style={{flex:1,justifyContent:"center", alignItems:"center"}}>
+                <Image source = {require('../../assets/splash.gif')} style={{height: 200 }}/>
             </View>
         )
     }

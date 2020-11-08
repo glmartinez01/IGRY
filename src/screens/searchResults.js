@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {StyleSheet,View,Text,Dimensions} from "react-native";
+import {StyleSheet,View,Text,Dimensions, Image} from "react-native";
 import { Container, H1,Spinner,Card,CardItem,Body,H3,Thumbnail, Left, Button } from "native-base";
 import backend from "../api/backend";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
@@ -37,8 +37,8 @@ const searchResults = ({route,navigation}) => {
 
     if(!games){
         return(
-            <View style={{flex:1,justifyContent:"center"}}>
-                <Spinner color="blue"/>
+            <View style={{flex:1,justifyContent:"center", alignItems:"center"}}>
+                <Image source = {require('../../assets/splash.gif')} style={{height: 200 }}/>
             </View>
         )
     }
@@ -62,7 +62,7 @@ const searchResults = ({route,navigation}) => {
                                                 <Thumbnail 
                                                         source = { 
                                                         item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
-                                                        : require("../../assets/control.jpg")}
+                                                        : require("../../assets/control1.png")}
                                                         style={item.cover ? styles.gameCover : styles.ImageNotFound}
                                                 />
                                                 <Body style={{alignItems:"flex-start"}}>

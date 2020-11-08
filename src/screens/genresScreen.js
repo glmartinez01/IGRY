@@ -84,15 +84,14 @@ const genresScreen = ({navigation}) => {
 
     if(!genres){
         return(
-            <View style={{flex:1,justifyContent:"center"}}>
-                <Spinner color="blue"/>
+            <View style={{flex:1,justifyContent:"center", alignItems:"center"}}>
+                <Image source = {require('../../assets/splash.gif')} style={{height: 200 }}/>
             </View>
         )
     }
 
     return(
         <Container style={{backgroundColor:'#000022'}}>
-            {console.log(array[0])}
             <FlatList
                         
                         numColumns={2}

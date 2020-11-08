@@ -47,7 +47,7 @@ export default function App(){
         <Stack.Navigator>
           <Stack.Screen name = "Home" component={drawer} options={{
             
-            title:'API',
+            title:'видео игра',
 
             headerStyle:{
               backgroundColor:'#1c2134',
@@ -86,14 +86,18 @@ export default function App(){
               backgroundColor:'#1c2134',
             },
           }}/>
-          <Stack.Screen name = "gamesbygenreScreen" component={gamesbygenreScreen} options={{
-              title:'Genres',
-              headerTitleAlign:"center",
-              headerTintColor:'#ffffff',
+          <Stack.Screen name = "gamesbygenreScreen" component={gamesbygenreScreen} options={
+            ({ route }) => ({
               headerStyle:{
-              backgroundColor:'#1c2134',
-            },
-          }}/>
+                backgroundColor:'#1c2134'},
+                title:"Solo hay dos Generos",
+                // title: route.params.name,
+                headerTintColor: "#fff",
+                headerTitleAlign:"center"
+              })
+                
+            }
+          />
         </Stack.Navigator>
       </NavigationContainer>
       
