@@ -47,7 +47,7 @@ export default function App(){
         <Stack.Navigator>
           <Stack.Screen name = "Home" component={drawer} options={{
             
-            title:'API',
+            title:'видео игра',
 
             headerStyle:{
               backgroundColor:'#1c2134',

@@ -6,17 +6,48 @@ import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const array = [
-    "./assets/Iconos/fighting.png",
-    "./assets/Iconos/shooter.png",
-    "./assets/Iconos/Music.png",
-    "./assets/Iconos/Platform.png",
-    "./assets/Iconos/Puzzle.png",
-    "./assets/Iconos/Racing.png",
-    "./assets/Iconos/Strategy.png",
-    "./assets/Iconos/RPG.png",
-    "./assets/Iconos/SIM.png",
-    "./assets/Iconos/Sport.png"  
+    {
+        id: 4,
+        img: "./assets/Iconos/fighting.png"
+    },
+    {
+        id: 5,
+        img: "./assets/Iconos/shooter.png"
+    },
+    {
+        id: 7,
+        img: "./assets/Iconos/Music.png"
+    },
+    {
+        id: 8,
+        img: "./assets/Iconos/Platform.png"
+    },
+    {
+        id: 9,
+        img: "./assets/Iconos/Puzzle.png"
+    },
+    {
+        id: 10,
+        img: "./assets/Iconos/Racing.png"
+    },
+    {
+        id: 11,
+        img: "./assets/Iconos/Strategy.png"
+    },
+    {
+        id: 12,
+        img: "./assets/Iconos/RPG.png"
+    },
+    {
+        id: 13,
+        img: "./assets/Iconos/SIM.png"
+    },
+    {
+        id: 14,
+        img: "./assets/Iconos/Sport.png" 
+    }
 ];
+
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 
@@ -77,6 +108,7 @@ const genresScreen = ({navigation}) => {
                                             </CardItem>
                                             <CardItem cardBody style={{backgroundColor:"#0d4b56",borderRadius:0}}>
                                                 <Body style={{justifyContent:"center",alignItems:"center"}}>
+                                                    array.map()
                                                     <Image
                                                         
                                                         source={array.map(require)}
