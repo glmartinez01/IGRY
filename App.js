@@ -47,7 +47,7 @@ export default function App(){
         <Stack.Navigator>
           <Stack.Screen name = "Home" component={drawer} options={{
             
-            title:'видео игра',
+            title:'API',
 
             headerStyle:{
               backgroundColor:'#1c2134',
@@ -87,7 +87,7 @@ export default function App(){
             },
           }}/>
           <Stack.Screen name = "gamesbygenreScreen" component={gamesbygenreScreen} options={{
-              title:"API",
+              title:'Genres',
               headerTitleAlign:"center",
               headerTintColor:'#ffffff',
               headerStyle:{

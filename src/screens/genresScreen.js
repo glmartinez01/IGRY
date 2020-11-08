@@ -4,47 +4,48 @@ import { Text,Dimensions,FlatList,Image } from "react-native";
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import _, { map,findWhere, collect, find, findIndex} from 'underscore';
 
 const array = [
     {
         id: 4,
-        img: "./assets/Iconos/fighting.png"
+        "img": require("../../assets/Iconos/fighting.png")
     },
     {
         id: 5,
-        img: "./assets/Iconos/shooter.png"
+        "img": require("../../assets/Iconos/shooter.png")
     },
     {
         id: 7,
-        img: "./assets/Iconos/Music.png"
+        "img": require("../../assets/Iconos/Music.png")
     },
     {
         id: 8,
-        img: "./assets/Iconos/Platform.png"
+        "img": require("../../assets/Iconos/Platform.png")
     },
     {
         id: 9,
-        img: "./assets/Iconos/Puzzle.png"
+        "img": require("../../assets/Iconos/Puzzle.png")
     },
     {
         id: 10,
-        img: "./assets/Iconos/Racing.png"
+        "img": require("../../assets/Iconos/Racing.png")
     },
     {
         id: 11,
-        img: "./assets/Iconos/Strategy.png"
+        "img": require("../../assets/Iconos/Strategy.png")
     },
     {
         id: 12,
-        img: "./assets/Iconos/RPG.png"
+        "img": require("../../assets/Iconos/RPG.png")
     },
     {
         id: 13,
-        img: "./assets/Iconos/SIM.png"
+        "img": require("../../assets/Iconos/SIM.png")
     },
     {
         id: 14,
-        img: "./assets/Iconos/Sport.png" 
+        "img": require("../../assets/Iconos/Sport.png") 
     }
 ];
 
@@ -91,6 +92,7 @@ const genresScreen = ({navigation}) => {
 
     return(
         <Container style={{backgroundColor:'#000022'}}>
+            {console.log(array[0])}
             <FlatList
                         
                         numColumns={2}
@@ -108,12 +110,10 @@ const genresScreen = ({navigation}) => {
                                             </CardItem>
                                             <CardItem cardBody style={{backgroundColor:"#0d4b56",borderRadius:0}}>
                                                 <Body style={{justifyContent:"center",alignItems:"center"}}>
-                                                    array.map()
                                                     <Image
-                                                        
-                                                        source={array.map(require)}
-                                                        style={{width:50,resizeMode:'contain',margin:20}}
-                                                        />
+                                                        source={array[findIndex(array, {id:item.id} )].img}
+                                                        style={{height:50,resizeMode:'contain',margin:20}}
+                                                    />
                                                 </Body>
                                             </CardItem>
                                             
