@@ -27,7 +27,7 @@ const MovieListScreen = ({navigation}) => {
 
     const getGames = async() => {
         try {
-            const response = await backend.get(`games/?fields=name,rating,cover.*`,{
+            const response = await backend.get(`games/?fields=name,rating,cover.*,platforms.*`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
@@ -118,8 +118,6 @@ const MovieListScreen = ({navigation}) => {
                                                             : require("../../assets/control1.png")}
                                                             style={item.cover ? styles.gameCover : styles.ImageNotFound}
                                                         />
-                                                        
-                                                        
                                                     </Body>
                                                 
                                             </CardItem>
@@ -166,6 +164,7 @@ const styles = StyleSheet.create({
     inputError:{
         borderColor : "#ff0000",
         borderWidth : 2,
+        color:'#b9da00'
     }
     
 })

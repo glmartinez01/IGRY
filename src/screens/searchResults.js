@@ -50,8 +50,8 @@ const searchResults = ({route,navigation}) => {
                
                data={games}
                keyExtractor={(item)=>item.id}
-               ListEmptyComponent=  {!games.length>=1 ? alert('No se encontraron resultados!') : <View></View>}
-
+               ListEmptyComponent=  {<View><Image source = {require('../../assets/tenor.gif')} style={{height:height, width:width}}/></View>}
+               //   !games.length>=1 ? alert('No se encontraron resultados!') : <View></View>
                renderItem={({item}) =>{
                    return(
                         <View>

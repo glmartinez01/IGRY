@@ -4,6 +4,7 @@ import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem,
 import getEnvVars from "../../environment";
 import backend from "../api/backend";
 import { log } from "react-native-reanimated";
+import Circulos from "./circulos"
 
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
@@ -17,7 +18,7 @@ const gameInfoScreen = ({route,navigation}) => {
     const getGameInfo = async () =>{
         try {
             try {
-                const response = await backend.get(`games/?fields=screenshots.*,summary,cover.*,rating&search=${name}`,{
+                const response = await backend.get(`games/?fields=screenshots.*,summary,cover.*,rating,platforms&search=${name}`,{
     
                     headers:{   'Client-ID':`${apiKey}`,
                                 'Authorization':`${apiAuthorization}`},
@@ -64,14 +65,17 @@ const gameInfoScreen = ({route,navigation}) => {
                                         style = {styles.gameThumbnail} />
                             <Body>
                                 <H3 style={{color:'white'}}>{name}</H3>
-                                
                             </Body>
                         </Left>
                     </CardItem>
                 </Card>
-                
+                    <CardItem style={{backgroundColor:'#0d4b56', borderWidth:0}}>
+                        <Text>Rating:</Text>
+                        <Circulos percentage={game[0].rating ? game[0].rating: 0 } color={'#b9da00'} delay={600} max={100}/>
+                        <Text>Platforms: {game[0].platforms ? game[0].platforms:`Not available!`}</Text>
+                    </CardItem>
                 <Text style={{color:'#ffffff',alignContent:"center",margin:35,fontSize:20}}>
-                   Summary: {game[0].summary?game[0].summary:`Description not available!`}
+                   Summary: {game[0].summary ? game[0].summary:`Description not available!`}
                 </Text>
             </View>   
         </Content>
