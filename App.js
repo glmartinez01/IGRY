@@ -46,7 +46,7 @@ export default function App(){
             
             ({ route }) => ({
 
-            title:'API',
+            title:'сука блять',
 
             headerStyle:{
               backgroundColor:'#1c2134',
@@ -67,16 +67,15 @@ export default function App(){
 
           })}
           />
-          <Stack.Screen name = "searchResults" component={searchResults} options={{
+          <Stack.Screen name = "searchResults" component={searchResults} options={
+            ({ route }) => ({
+              title: "Resultados: " + route.params.search,
+              headerTintColor:'#ffffff',
+              headerStyle:{
+                backgroundColor:'#1c2134',
+              },
 
-            title:'Resultados',
-            headerTitleAlign:'center',
-            headerTintColor:'#ffffff',
-            headerStyle:{
-              backgroundColor:'#1c2134',
-            },
-
-          }}/>
+          })}/>
           <Stack.Screen name = "gameInfoScreen" component={gameInfoScreen} options={{
               title:"Información",
               headerTitleAlign:"center",

@@ -5,6 +5,7 @@ import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
+import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 //import timeStamp from "../../timestamp";
 
 
@@ -22,6 +23,7 @@ const MovieListScreen = ({navigation}) => {
     const [games,setGames] = useState(null);
     const [error,setError] = useState(false);
     const [search,setSearch] = useState("");
+    const [searchError,setSearchError] = useState(false);
 
     const getGames = async() => {
         try {
@@ -39,6 +41,19 @@ const MovieListScreen = ({navigation}) => {
         
         
     }
+    
+    const handlerSearch = () => {
+        if(!search)  {
+            setSearchError(true);
+            Keyboard.dismiss(); 
+        }
+        else
+        {
+            Keyboard.dismiss(); 
+            navigation.navigate('searchResults',{search})
+            setSearchError(false)
+        }
+    }
 
     useEffect(()=>{
 
@@ -46,9 +61,13 @@ const MovieListScreen = ({navigation}) => {
 
     },[])
 
+    useEffect(() => {
+        if (search) setSearchError(false)
+    }, [search]);
+
     if(!games){
         return(
-            <View style={{flex:1,justifyContent:"center", alignItems:"center"}}>
+            <View style={{flex:1,justifyContent:"center", alignItems:"center", backgroundColor:'#ffffd1'}}>
                 <Image source = {require('../../assets/splash.gif')} style={{height: 200 }}/>
             </View>
         )
@@ -62,9 +81,9 @@ const MovieListScreen = ({navigation}) => {
                     
                     <Header searchBar rounded style={{backgroundColor:'#1c2134'}}>
                         <Item style={{backgroundColor:'#1c2134'}}>
-                            <Icon name="search" style={{color: '#b9da00'}}/>
-                            <Input placeholder="Buscar" value={search} onChangeText={setSearch} placeholderTextColor={'#b9da00'} style={{color:'#b9da00'}}/>
-                            <AntDesign name="rightcircle" size={24} style={{color: '#b9da00'}} onPress={() => { Keyboard.dismiss(), search ? navigation.navigate('searchResults',{search}): alert('Ingrese algo para buscar!') }}/>
+                            <Icon name="search" style={searchError ? {color:'#ff0000'} : {color:'#b9da00'}}/>
+                            <Input placeholder="Buscar" value={search} onChangeText={setSearch} placeholderTextColor={'#b9da00'} style={searchError ? styles.inputError : {color:'#b9da00'}}/>
+                            <AntDesign name="rightcircle" size={24} style={{color: '#b9da00'}} onPress={handlerSearch}/>
                         </Item>
                     </Header>
                     
@@ -144,6 +163,10 @@ const styles = StyleSheet.create({
         height:height*0.5,
         resizeMode:"contain"
     },
+    inputError:{
+        borderColor : "#ff0000",
+        borderWidth : 2,
+    }
     
 })
 
