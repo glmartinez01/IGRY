@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {StyleSheet,Image,Dimensions} from "react-native";
-import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left} from "native-base";
+import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container} from "native-base";
 import getEnvVars from "../../environment";
 import backend from "../api/backend";
-import { log } from "react-native-reanimated";
+import { ceil, log } from "react-native-reanimated";
 import Circulos from "./circulos"
 
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
@@ -18,7 +18,7 @@ const gameInfoScreen = ({route,navigation}) => {
     const getGameInfo = async () =>{
         try {
             try {
-                const response = await backend.get(`games/?fields=screenshots.*,summary,cover.*,rating,platforms&search=${name}`,{
+                const response = await backend.get(`games/?fields=screenshots.*,summary,cover.*,rating,platforms.*&search=${name}`,{
     
                     headers:{   'Client-ID':`${apiKey}`,
                                 'Authorization':`${apiAuthorization}`},
@@ -27,7 +27,7 @@ const gameInfoScreen = ({route,navigation}) => {
                             
                 });
                 setGame(response.data);
-                //{console.log(response.data)};
+                {console.log(response.data)};
             } catch (error) {
                 setError(true);
             }
@@ -69,11 +69,19 @@ const gameInfoScreen = ({route,navigation}) => {
                         </Left>
                     </CardItem>
                 </Card>
-                    <CardItem style={{backgroundColor:'#0d4b56', borderWidth:0}}>
-                        <Text>Rating:</Text>
-                        <Circulos percentage={game[0].rating ? game[0].rating: 0 } color={'#b9da00'} delay={600} max={100}/>
-                        <Text>Platforms: {game[0].platforms ? game[0].platforms:`Not available!`}</Text>
+                <Card style={{borderColor:'#0d4b56'}}>
+                    <CardItem style={{width:width,backgroundColor:'#0d4b56'}}>
+                        <Text style={{flex:1,color:'#ffffff',fontSize:20,padding:0}}>{`\t\t\t`}Rating:</Text>
+                        <Content>
+                            <Circulos percentage={game[0].rating ? game[0].rating: 0 } color={'#b9da00'} delay={600} max={100}/>
+                        </Content> 
+                        
                     </CardItem>
+                    <CardItem style={{backgroundColor:'#0d4b56'}}>
+                            <Text style={{color:'#fff',fontSize:19}}>{`\t\t\t`}Platforms: {game[0].platforms[0].name}</Text>
+                    </CardItem>  
+                    
+                </Card>
                 <Text style={{color:'#ffffff',alignContent:"center",margin:35,fontSize:20}}>
                    Summary: {game[0].summary ? game[0].summary:`Description not available!`}
                 </Text>

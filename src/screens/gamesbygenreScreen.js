@@ -5,8 +5,11 @@ import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+
+
+
 const {width, height} = Dimensions.get("window");
-const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
+const {apiKey,apiUrl,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 
 
 const gamesbygenreScreen=({route,navigation})=>{
@@ -14,21 +17,31 @@ const gamesbygenreScreen=({route,navigation})=>{
     const {id} = route.params;
     const [gamesgenre,setGamesGenre] = useState(null);
     const [error,setError] = useState(false);
+   // const rawQueryString = `fields name,screenshots.*,cover.*,rating,platforms,genres;where genres=${id};`;
+    const requestOptions = {
+        queryMethod: 'url',
+        method: 'post',
+        baseURL: `${apiUrl}`,
+        headers: {
+            'Client-ID': `${apiKey}`,
+            'Authorization': `${apiAuthorization}`
+        },
+        responseType: 'json',
+    };
 
 
     const getGamesGenres = async() => {
+
         try {
-            const response = await backend.get(`games/?fields=name,rating,cover.*`,
-                {
-                    headers:{   
-                                'Client-ID':`${apiKey}`,
-                                'Authorization':`${apiAuthorization}`
-                            }, 
-                }
+            const response = await backend.post(`games/?`,`fields name,rating,cover.*,platforms.*;where genres = ${id} & rating >=70;limit 20;`,{
+
+                headers:{   'Client-ID':`${apiKey}`,
+                            'Authorization':`${apiAuthorization}`}
                         
-            );
+            });
+
             setGamesGenre(response.data);
-            //{console.log(response.data)}
+            {console.log(response.data)}
         } catch (error) {
             setError(true);
             {console.log(error)};

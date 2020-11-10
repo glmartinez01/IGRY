@@ -27,7 +27,7 @@ const MovieListScreen = ({navigation}) => {
 
     const getGames = async() => {
         try {
-            const response = await backend.get(`games/?fields=name,rating,cover.*,platforms.*`,{
+            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;where rating >= 90;`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
@@ -36,7 +36,7 @@ const MovieListScreen = ({navigation}) => {
             setGames(response.data);
         } catch (error) {
             setError(true);
-            throw error;
+            
         }
         
         
@@ -50,8 +50,9 @@ const MovieListScreen = ({navigation}) => {
         else
         {
             Keyboard.dismiss(); 
-            navigation.navigate('searchResults',{search})
-            setSearchError(false)
+            navigation.navigate('searchResults',{search});
+            setSearch("");
+            setSearchError(false);
         }
     }
 

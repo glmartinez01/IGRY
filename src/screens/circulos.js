@@ -17,7 +17,9 @@ export default function Donut({
   color = "tomato",
   delay = 0,
   textColor,
-  max = 100
+  max = 100,
+  x="50%",
+  y='50%'
 }) {
   const animated = React.useRef(new Animated.Value(0)).current;
   const circleRef = React.useRef();
@@ -62,14 +64,14 @@ export default function Donut({
       <Svg
         height={radius * 2}
         width={radius * 2}
-        viewBox={`0 0 ${halfCircle * 2} ${halfCircle * 2}`}>
+        viewBox={`0 0 ${halfCircle*2} ${halfCircle *2}`}>
         <G
           rotation="-90"
           origin={`${halfCircle}, ${halfCircle}`}>
           <Circle
             ref={circleRef}
-            cx="50%"
-            cy="50%"
+            cx={x}
+            cy={y}
             r={radius}
             fill="transparent"
             stroke={color}
@@ -79,8 +81,8 @@ export default function Donut({
             strokeDasharray={circumference}
           />
           <Circle
-            cx="50%"
-            cy="50%"
+            cx={x}
+            cy={y}
             r={radius}
             fill="transparent"
             stroke={color}

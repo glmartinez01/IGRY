@@ -46,7 +46,7 @@ export default function App(){
             
             ({ route }) => ({
 
-            title:'сука блять',
+            title:'IGRY',
 
             headerStyle:{
               backgroundColor:'#1c2134',
