@@ -6,6 +6,7 @@ import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+import { color } from "react-native-reanimated";
 //import timeStamp from "../../timestamp";
 
 const pantalla = 1;
@@ -27,7 +28,7 @@ const MovieListScreen = ({navigation}) => {
 
     const getGames = async() => {
         try {
-            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;where rating >= 80;`,{
+            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;where rating >=90;`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
@@ -81,52 +82,40 @@ const MovieListScreen = ({navigation}) => {
                     <StatusBar hidden={true}/>
                     
                     <Header searchBar rounded style={{backgroundColor:'#1c2134'}}>
-                        <Item style={{backgroundColor:'#1c2134'}}>
-                            <Icon name="search" style={searchError ? {color:'#ff0000'} : {color:'#b9da00'}}/>
-                            <Input placeholder="Buscar" value={search} onChangeText={setSearch} placeholderTextColor={'#b9da00'} style={searchError ? styles.inputError : {color:'#b9da00'}}/>
-                            <AntDesign name="rightcircle" size={24} style={{color: '#b9da00'}} onPress={handlerSearch}/>
+                        <Icon name="search" style={searchError ? {color:'#ff0000',marginTop:13} : {color:'#b9da00',marginTop:13}}/>
+                        <Item style={{backgroundColor:'#121521',marginLeft:5}}>
+                            <Input placeholder="Buscar" value={search} onChangeText={setSearch} placeholderTextColor={searchError?'#ff0000':'#b9da00'} style={{color:'#b9da00'}}/>
+                            <AntDesign name="rightcircle" size={24} style={searchError?{color:'#ff0000',marginRight:5}:{color: '#b9da00',marginRight:5}} onPress={handlerSearch}/>
                         </Item>
                     </Header>
                     
                     
                     <FlatList
+                        numColumns={2}
                         style={{borderRadius:1}}
                         data={games}
                         keyExtractor={(item)=>item.id}
                         ListEmptyComponent={<Text>No se han encontrado juegos!</Text>}
 
                         renderItem={({item}) => {
-                            return(
-                                <View style={{flex:1, alignItems:"center"}}>
-                                    <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id, pantalla})}>
-                                        <Card style={{ width:width*0.85,alignContent:"center"}}>
-                                            <CardItem style={{backgroundColor:'#1c2134'}}>
-                                                <Left>
-                                                    <Thumbnail source = {item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
-                                                                : require("../../assets/control1.png")}
-                                                                style={{resizeMode:'contain'}}
+                                return(
+                                    <View style={{flex:1, alignItems:"center"}}>
+                                        <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id, pantalla})}>
+                                            <Card style={styles.gallery}>
+                                                <CardItem style={{height:50,width:width*0.44,backgroundColor:'#1c2134',borderRadius:10}}>
+                                                    <Text style={{color:'#fff'}}>{item.name}</Text>
+                                                </CardItem>
+                                                <CardItem style={{backgroundColor:'#121521',borderRadius:10}}>
+                                                    <Image 
+                                                        source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
+                                                        : require("../../assets/control1.png")} style={{flex:1,height:90,resizeMode:"contain"}}
                                                     />
-                                                    <Body>
-                                                        <H3 style={{color:'#ffffff'}}>{item.name}</H3>
-                                                    </Body>
-                                                </Left>
-                                            </CardItem>
-                                            <CardItem cardBody >
-                                                    <Body style={{alignItems:"center",backgroundColor:'#1c2134'}}>
-                                                        
-                                                        <Image 
-                                                            source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
-                                                            : require("../../assets/control1.png")}
-                                                            style={item.cover ? styles.gameCover : styles.ImageNotFound}
-                                                        />
-                                                    </Body>
-                                                
-                                            </CardItem>
-                                        </Card>
-                                    </TouchableOpacity>
-                                </View>
-                            )
-                        }
+                                                </CardItem>
+                                            </Card>
+                                        </TouchableOpacity>
+                                    </View>
+                                )
+                            }
                         }
                     />
 
@@ -145,8 +134,8 @@ const styles = StyleSheet.create({
         margin:15
     },
     gameCover:{
-        flex:1,
-        width: width*0.85,
+        
+        width: width*0.5,
         height:height*0.5,
         resizeMode:"contain",
         
@@ -163,10 +152,25 @@ const styles = StyleSheet.create({
         resizeMode:"contain"
     },
     inputError:{
-        borderColor : "#ff0000",
+        
         borderWidth : 2,
-        color:'#b9da00'
-    }
+        color:'#b9da00',
+        backgroundColor:'#121521',
+        marginLeft:5
+    },
+    gallery:{
+        borderColor:'#fff',
+        backgroundColor:'#121521',
+        borderWidth:3, 
+        borderRadius:10, 
+        height:height*0.27, 
+        width:width*0.45,
+        marginLeft:20,
+        marginRight:20,
+        marginTop:10,
+        marginBottom:10,
+        alignItems:'center',
+    },
     
 })
 

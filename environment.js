@@ -8,7 +8,8 @@ const ENV = {
         apiAuthorization: "Bearer frefjyp97udjwq50ubue49vp9ofguu",
         apiUrl: "https://api.igdb.com/v4/",
         apiImageUrl:"https://images.igdb.com/igdb/image/upload/",
-        apiImageSize:"t_cover_big/"
+        apiImageSize:"t_cover_big/",
+        apiSSSize:"t_1080p/"
        
     }
 };

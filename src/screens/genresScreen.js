@@ -155,11 +155,11 @@ const genresScreen = ({navigation}) => {
                             return(
                                 <View>
                                     <TouchableOpacity onPress={()=> navigation.navigate("gamesbygenreScreen",{id:item.id, name:item.name})}>
-                                        <Card style={{width:width*0.49,borderColor:'#000000',backgroundColor:'#000022'}}>
-                                            <CardItem style={{height:75,justifyContent:"center",alignItems:"center",backgroundColor:"#007a7c",borderRadius:0}}>
-                                                    <H3 style={{color:'#ffffff'}}>{item.name}</H3>
+                                        <Card style={{width:width*0.49,borderColor:'#000000',backgroundColor:'#0d4b56',borderRadius:10}}>
+                                            <CardItem style={{height:65,justifyContent:"center",alignItems:"center",backgroundColor:"#007a7c",borderRadius:10}}>
+                                                    <H3 style={{color:'#ffffff',fontSize:18}}>{item.name}</H3>
                                             </CardItem>
-                                            <CardItem cardBody style={{backgroundColor:"#0d4b56",borderRadius:0}}>
+                                            <CardItem cardBody style={{backgroundColor:"#0d4b56",borderRadius:10}}>
                                                 <Body style={{justifyContent:"center",alignItems:"center"}}>
                                                     <Image
                                                         source={array[findIndex(array, {id:item.id} )].img}

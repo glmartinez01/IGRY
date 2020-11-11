@@ -17,7 +17,7 @@ const searchResults = ({route,navigation}) => {
 
     const getSearchGames = async () => {
         try {
-            const response = await backend.get(`games/?fields=name,rating,cover.*&search=${search}`,{
+            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;search "${search}";`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
@@ -45,7 +45,7 @@ const searchResults = ({route,navigation}) => {
     }
 
     return(
-        <Container style={{backgroundColor:'#ffffd1'}}>
+        <Container style={{backgroundColor:'#353b52'}}>
             
             <FlatList 
                
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
     },
     ImageNotFound:{
         width : 70,
-        height: 50
+        height: 50,
+        resizeMode:"contain"
     },
     contentNotFound:{
         flex:1,

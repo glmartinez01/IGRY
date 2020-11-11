@@ -5,9 +5,19 @@ import getEnvVars from "../../environment";
 import backend from "../api/backend";
 import { ceil, log } from "react-native-reanimated";
 import Circulos from "../obj/circulos"
+import { FlatList } from "react-native-gesture-handler";
 
-const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
+const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
+// {/* <View style={{flexDirection:'row', justifyContent:'flex-start',flexWrap:'wrap',alignSelf:'flex-start'}}>
+//         {game[0].screenshots ? game[0].screenshots.map((element,key)=>(
+//             <Image 
+//             key={key} 
+//             style={styles.gameCover1} 
+//             source={{uri: `${apiImageUrl}${apiImageSize}${element.image_id}.jpg`}} 
+//             />
+//         )): <Image source ={require("../../assets/control1.png")}/>}                          
+//     </View> */}
 
 const gameInfoScreen = ({route,navigation}) => {
 
@@ -69,41 +79,38 @@ const gameInfoScreen = ({route,navigation}) => {
                             horizontal={true}
                             showsHorizontalScrollIndicator={false}
                         >
+                        
+                        <Image 
+                                    source={game[0].screenshots ? ( {uri:`${apiImageUrl}${apiSSSize}${game[0].screenshots[0].image_id}.jpg`}): require("../../assets/control1.png")}
+                                    style={styles.gameCover1}
+                        />
                             
-                            <View style={{flexDirection:'row', justifyContent:'flex-start',flexWrap:'wrap',alignSelf:'flex-start'}}>
-                                {game[0].screenshots ? game[0].screenshots.map((element,key)=>(
-                                    <Image 
-                                    key={key} 
-                                    style={styles.gameCover1} 
-                                    source={{uri: `${apiImageUrl}${apiImageSize}${element.image_id}.jpg`}} 
-                                    />
-                                )): require("../../assets/control1.png")} 
-                                
-                            </View>
                     </ScrollView>
                 </View>
 
                 <ScrollView
                     vertical={true}
                     showsVerticalScrollIndicator={false}
-                    style={{flex:1, marginTop:170}}
+                    style={{flex:1, marginTop:1}}
                 >
                     <Card style={styles.vertical}>
                         <Image source={game[0].cover ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].cover.image_id}.jpg`}): require("../../assets/control1.png") }
                                 style = {styles.gameCover} />
                         <H3 style={{color:'#000000',textAlign:'center'}}>{name}</H3>
-                        <CardItem style={{flexDirection:'row', justifyContent:'flex-start',flexWrap:'wrap',alignSelf:'flex-start'}}>
+                        <CardItem>
+                            <Text style={{fontSize:20}}>Rating:</Text>
                             <View >
                                 <Circulos percentage={game[0].rating ? game[0].rating: 0 } color={'#b9da00'} delay={600} max={100}/>
                             </View>
-                            <View style={{ustifyContent:'flex-start',flexWrap:'wrap',alignSelf:'center', alignContent:'center'}}>
-                                {game[0].platforms.map((element,key)=>(<Text key={key} style={{fontSize:19,color:'#000',textAlign:"center"}}>{element.name}</Text>))}
-                            </View>
                         </CardItem>
                         <CardItem>
-                            <Text style={{fontSize:20}}>Rating</Text>
-                            <Text style={{fontSize:19}}>Platforms</Text>
-                        </CardItem>  
+                            <Text style={{fontSize:19}}>Platforms: </Text>
+                            <View style={{ustifyContent:'flex-start',flexWrap:'wrap',alignSelf:'center', alignContent:'center'}}>
+                                {game[0].platforms ? game[0].platforms.map((element,key)=>(
+                                    <Text key={key}>{element.name}</Text>
+                                )):<Text>?</Text>} 
+                            </View>
+                        </CardItem>
                     </Card>
                     <Card style={styles.v1}>
                         <CardItem style={{borderRadius:10}}>
@@ -115,7 +122,7 @@ const gameInfoScreen = ({route,navigation}) => {
                 </ScrollView>
             <TouchableHighlight onPress={() => navigation.navigate(screenRoute)} style={styles.icono}>
                     <View>
-                        <Icon name="arrow-back" style={{color:"#000000",width:30}} />
+                        <Icon name="arrow-back" style={{color:"#fff",width:30}} />
                     </View>
             </TouchableHighlight>
             
@@ -155,11 +162,10 @@ const styles = StyleSheet.create({
         borderColor:'#fff',
         backgroundColor:'#fff',
         borderWidth:3, 
-        borderRadius:10, 
-        height:height*0.7, 
+        borderRadius:10,  
         marginLeft:20,
         marginRight:20,
-        marginTop:30,
+        marginTop:170,
         marginBottom:10,
         alignItems:'center',
     },
