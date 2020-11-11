@@ -91,7 +91,7 @@ const gameInfoScreen = ({route,navigation}) => {
                 <ScrollView
                     vertical={true}
                     showsVerticalScrollIndicator={false}
-                    style={{flex:1, marginTop:1}}
+                    style={{flex:1, marginTop:0}}
                 >
                     <Card style={styles.vertical}>
                         <Image source={game[0].cover ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].cover.image_id}.jpg`}): require("../../assets/control1.png") }

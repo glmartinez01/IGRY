@@ -1,5 +1,5 @@
 import React, {useState } from "react";
-import {NavigationContainer} from "@react-navigation/native";
+import {NavigationContainer,DrawerActions} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import MovieListScreen from "./src/screens/MovieListScreen";
 import searchResults from "./src/screens/searchResults";
@@ -7,8 +7,12 @@ import gameInfoScreen from "./src/screens/gameInfoScreen";
 import genresScreen from "./src/screens/genresScreen";
 import gamesbygenreScreen from "./src/screens/gamesbygenreScreen";
 import {Image} from "react-native";
-import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign ,MaterialIcons,Entypo } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button} from "native-base";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+const Tab = createBottomTabNavigator();
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -17,12 +21,12 @@ function drawer(){
 
   return(
     
-      <Drawer.Navigator initialRouteName="gameList" drawerStyle={{backgroundColor:'#1c2134'}} drawerContentOptions={{
+      <Drawer.Navigator initialRouteName="gameList" drawerPosition={"right"} drawerStyle={{backgroundColor:'#1c2134'}} drawerContentOptions={{
 
         inactiveTintColor:'#ffffff'
       }}>
         <Drawer.Screen name="gameList" component={MovieListScreen} options={{
-          title:'Lista de Juegos',
+          title:'Juegos',
 
         }} />
         <Drawer.Screen name="Genres" component={genresScreen} options={{
@@ -35,6 +39,26 @@ function drawer(){
 
 }
 
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="gameList" component={MovieListScreen} options={{
+          title:'Games',
+          tabBarIcon:({color,size}) =>(
+            <Image source={require("./assets/tab1.png")} style={{height:30,width:25}}/>
+          ),
+
+        }} />
+        <Tab.Screen name="Genres" component={genresScreen} options={{
+          title:'Genres',
+          tabBarIcon:({color,size}) =>(
+            <Image source={require("./assets/tab2.png")} style={{height:39,width:25}}/>
+          ),
+        }}/>
+    </Tab.Navigator>
+  );
+}
+
 
 export default function App(){
   return (
@@ -42,7 +66,7 @@ export default function App(){
       <NavigationContainer>
         
         <Stack.Navigator>
-          <Stack.Screen name = "Home" component={drawer} options={
+          <Stack.Screen name = "Home" component={MyTabs} options={
             
             ({ route }) => ({
 

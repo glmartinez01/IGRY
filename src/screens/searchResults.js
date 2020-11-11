@@ -8,6 +8,7 @@ import getEnvVars from "../../environment"
 const pantalla = 2;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
+//https://reactnativecode.com/react-native-create-show-array-elements-text-using-map/
 
 const searchResults = ({route,navigation}) => {
     const {search} = route.params;
