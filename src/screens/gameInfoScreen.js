@@ -6,18 +6,12 @@ import backend from "../api/backend";
 import { ceil, log } from "react-native-reanimated";
 import Circulos from "../obj/circulos"
 import { FlatList } from "react-native-gesture-handler";
+import Carousel from 'react-native-looped-carousel'
 
 const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
-// {/* <View style={{flexDirection:'row', justifyContent:'flex-start',flexWrap:'wrap',alignSelf:'flex-start'}}>
-//         {game[0].screenshots ? game[0].screenshots.map((element,key)=>(
-//             <Image 
-//             key={key} 
-//             style={styles.gameCover1} 
-//             source={{uri: `${apiImageUrl}${apiImageSize}${element.image_id}.jpg`}} 
-//             />
-//         )): <Image source ={require("../../assets/control1.png")}/>}                          
-//     </View> */}
+
+// https://github.com/phil-r/react-native-looped-carousel
 
 const gameInfoScreen = ({route,navigation}) => {
 
@@ -75,19 +69,23 @@ const gameInfoScreen = ({route,navigation}) => {
         <Container style={{flex:1, backgroundColor:'#ffffd1'}}>
             
                 <View style={{flex:0.55, alignItems: 'center', justifyContent: 'center',zIndex:-1, position:'absolute'}}>
-                    <ScrollView
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
+                    <Carousel
+                            style={styles.carusel}
+                            autoplay={true}
+                            delay={2000}
                         >
-                        
-                        <Image 
-                                    source={game[0].screenshots ? ( {uri:`${apiImageUrl}${apiSSSize}${game[0].screenshots[0].image_id}.jpg`}): require("../../assets/control1.png")}
-                                    style={styles.gameCover1}
-                        />
-                            
-                    </ScrollView>
+                        {game[0].screenshots ? game[0].screenshots.map((element,key)=>(
+                            <Image 
+                                key={key} 
+                                style={styles.gameCover1} 
+                                source={{uri: `${apiImageUrl}${apiSSSize}${element.image_id}.jpg`}} 
+                            />
+                        )): <Image source ={require("../../assets/control1.png")}style = {styles.ImageNotFound}/>}   
+                    </Carousel>
                 </View>
-
+                <View style={{flex:0.50,zIndex:-2, position:'absolute'}}>
+                    <Image source ={require("../../assets/wallpaper.png")} style={{height:height}}/>
+                </View>
                 <ScrollView
                     vertical={true}
                     showsVerticalScrollIndicator={false}
@@ -138,18 +136,27 @@ const styles = StyleSheet.create({
         width:width*0.98,
     
     },
+    carusel:{
+        width: width,
+        height:height*0.35,
+        flexDirection:'row', 
+        justifyContent:'flex-start',
+        alignSelf:'flex-start'
+    },
     gameCover1:{
         width: width,
-        height:height*0.35
+        height:height*0.35,
     },
     gameCover:{
         width: width*0.50,
         height:height*0.30,
-        resizeMode:"contain"
+        resizeMode:"contain",
+        marginTop:'-15%',
+        borderRadius:10
     },
     ImageNotFound:{
-        width : 70,
-        height: 50,
+        width: width,
+        height:height*0.35,
         resizeMode:"contain"
     },
     icono:{
@@ -165,7 +172,7 @@ const styles = StyleSheet.create({
         borderRadius:10,  
         marginLeft:20,
         marginRight:20,
-        marginTop:170,
+        marginTop:200,
         marginBottom:10,
         alignItems:'center',
     },
@@ -176,7 +183,7 @@ const styles = StyleSheet.create({
         borderRadius:10, 
         marginLeft:20,
         marginRight:20,
-        marginTop:30,
+        marginTop:20,
         marginBottom:10,
         alignItems:'center',
         justifyContent:'center',
