@@ -77,12 +77,7 @@ export default function App(){
 
           })}/>
           <Stack.Screen name = "gameInfoScreen" component={gameInfoScreen} options={{
-              title:"Información",
-              headerTitleAlign:"center",
-              headerTintColor:'#ffffff',
-              headerStyle:{
-              backgroundColor:'#1c2134',
-            },
+            headerShown: false
           }}/>
           <Stack.Screen name = "gamesbygenreScreen" component={gamesbygenreScreen} options={
             ({ route }) => ({

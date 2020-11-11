@@ -5,6 +5,7 @@ import backend from "../api/backend";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import getEnvVars from "../../environment"
 
+const pantalla = 2;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 
@@ -55,7 +56,7 @@ const searchResults = ({route,navigation}) => {
                renderItem={({item}) =>{
                    return(
                         <View>
-                            <TouchableOpacity onPress ={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
+                            <TouchableOpacity onPress ={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id,pantalla})}>
                                 <Card style={{borderColor:'black'}}>
                                     <CardItem cardBody style={{flex:1,height:100,backgroundColor:'#1c2134'}}>
                                             <Left>

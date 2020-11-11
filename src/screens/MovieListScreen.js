@@ -8,7 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 //import timeStamp from "../../timestamp";
 
-
+const pantalla = 1;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 //var ts = 1;//new Date().getTime();
@@ -27,7 +27,7 @@ const MovieListScreen = ({navigation}) => {
 
     const getGames = async() => {
         try {
-            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;where rating >= 90;`,{
+            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;where rating >= 80;`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
@@ -98,7 +98,7 @@ const MovieListScreen = ({navigation}) => {
                         renderItem={({item}) => {
                             return(
                                 <View style={{flex:1, alignItems:"center"}}>
-                                    <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
+                                    <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id, pantalla})}>
                                         <Card style={{ width:width*0.85,alignContent:"center"}}>
                                             <CardItem style={{backgroundColor:'#1c2134'}}>
                                                 <Left>

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import {StyleSheet,Image,Dimensions} from "react-native";
-import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container} from "native-base";
+import {StyleSheet,Image,Dimensions,ScrollView,TouchableHighlight} from "react-native";
+import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container,Icon} from "native-base";
 import getEnvVars from "../../environment";
 import backend from "../api/backend";
 import { ceil, log } from "react-native-reanimated";
-import Circulos from "./circulos"
+import Circulos from "../obj/circulos"
+import ScrollH from "../obj/scrollH"
 
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 
 const gameInfoScreen = ({route,navigation}) => {
 
-    const {name,id} = route.params;
+    const {name,id,pantalla} = route.params;
     const [game,setGame] = useState(null);
     const [error,setError] = useState(false);
 
@@ -27,13 +28,21 @@ const gameInfoScreen = ({route,navigation}) => {
                             
                 });
                 setGame(response.data);
-                {console.log(response.data)};
             } catch (error) {
                 setError(true);
             }
         } catch (error) {
             
         }
+    }
+    if(pantalla===1){
+        screen = "gameList"
+    }
+    if(pantalla===2){
+        screen = "searchResults"
+    }
+    if(pantalla===3){
+        screen = "gamesbygenreScreen"
     }
 
     useEffect(()=>{
@@ -49,44 +58,45 @@ const gameInfoScreen = ({route,navigation}) => {
             </View>
         )
     }
+    
 
+	
     return(
-        <Content style={{backgroundColor:'#0d4b56'}}>
-            <View style={{alignItems:"center"}}>
-                <Card style={{ borderColor:'#0b0d14',width:width*0.95,alignItems:"center",justifyContent:"center"}}>
-                    <CardItem style={{height:height*0.35,backgroundColor:'#1c2134',borderRadius:0}}>
-                        
-                        <Image source={game[0].screenshots ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].screenshots[0].image_id}.jpg`}): require("../../assets/control1.png") }
-                                style = {styles.gameCover} />
-                    </CardItem>
-                    <CardItem style={{backgroundColor:'#007a7c',borderRadius:0}}>
-                        <Left>
-                            <Thumbnail source={game[0].cover ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].cover.image_id}.jpg`}): require("../../assets/control1.png") }
-                                        style = {styles.gameThumbnail} />
-                            <Body>
-                                <H3 style={{color:'white'}}>{name}</H3>
-                            </Body>
-                        </Left>
-                    </CardItem>
-                </Card>
-                <Card style={{borderColor:'#0d4b56'}}>
-                    <CardItem style={{width:width,backgroundColor:'#0d4b56'}}>
-                        <Text style={{flex:1,color:'#ffffff',fontSize:20,padding:0}}>{`\t\t\t`}Rating:</Text>
-                        <Content>
-                            <Circulos percentage={game[0].rating ? game[0].rating: 0 } color={'#b9da00'} delay={600} max={100}/>
-                        </Content> 
-                        
-                    </CardItem>
-                    <CardItem style={{backgroundColor:'#0d4b56'}}>
-                            <Text style={{color:'#fff',fontSize:19}}>{`\t\t\t`}Platforms: {game[0].platforms[0].name}</Text>
-                    </CardItem>  
+        <Container style={{backgroundColor:'#0d4b56', flex:1}}>
+            <View style={{flex:2/3, alignItems: 'center', justifyContent: 'center', paddingBottom:-30}}>
+                <ScrollView
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        <ScrollH 
+                            ss={game[0].screenshots ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].screenshots[0].image_id}.jpg`}): require("../../assets/control1.png") }
+                        />
+                        <ScrollH 
+                            ss={game[0].screenshots ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].screenshots[1].image_id}.jpg`}): require("../../assets/control1.png") }
+                        />
+                </ScrollView>
+            </View>
+
+            <ScrollView
+                vertical={true}
+                showsVerticalScrollIndicator={false}
+                style={{flex:1/3}}
+            >
+                
+                <Card style={styles.vertical}>
                     
                 </Card>
-                <Text style={{color:'#ffffff',alignContent:"center",margin:35,fontSize:20}}>
-                   Summary: {game[0].summary ? game[0].summary:`Description not available!`}
-                </Text>
-            </View>   
-        </Content>
+                <Card style={styles.vertical}>
+                    
+                </Card>
+            </ScrollView>
+            <TouchableHighlight onPress={() => navigation.navigate(screen)} style={styles.icono}>
+                    <View>
+                        <Icon name="arrow-back" style={{color:"#fff",width:30, zIndex: 1}} />
+                    </View>
+            </TouchableHighlight>
+            
+        </Container>
 
     );
 }
@@ -104,17 +114,31 @@ const styles = StyleSheet.create({
         resizeMode:"contain"
     },
     gameCover:{
-        flex:1,
-        width: width*0.99,
+        width: width*0.85,
         height:height*0.5,
-        resizeMode:"contain"
     },
     ImageNotFound:{
         width : 70,
         height: 50,
         resizeMode:"contain"
     },
-
+    icono:{
+        position:'absolute',
+        marginLeft:10,
+        marginTop:10,
+    },
+    vertical:{
+        borderColor:'#fff',
+        backgroundColor:'#ff0000',
+        borderWidth:3, 
+        borderRadius:10, 
+        height:height*0.5, 
+        width:width*0.9,
+        marginLeft:20,
+        marginRight:20,
+        marginTop:0,
+        marginBottom:20
+    },
 });
 
 

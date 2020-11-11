@@ -7,7 +7,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 
-
+const pantalla = 3;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiUrl,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 
@@ -17,17 +17,6 @@ const gamesbygenreScreen=({route,navigation})=>{
     const {id} = route.params;
     const [gamesgenre,setGamesGenre] = useState(null);
     const [error,setError] = useState(false);
-   // const rawQueryString = `fields name,screenshots.*,cover.*,rating,platforms,genres;where genres=${id};`;
-    const requestOptions = {
-        queryMethod: 'url',
-        method: 'post',
-        baseURL: `${apiUrl}`,
-        headers: {
-            'Client-ID': `${apiKey}`,
-            'Authorization': `${apiAuthorization}`
-        },
-        responseType: 'json',
-    };
 
 
     const getGamesGenres = async() => {
@@ -41,7 +30,6 @@ const gamesbygenreScreen=({route,navigation})=>{
             });
 
             setGamesGenre(response.data);
-            {console.log(response.data)}
         } catch (error) {
             setError(true);
             {console.log(error)};
@@ -74,7 +62,7 @@ const gamesbygenreScreen=({route,navigation})=>{
                     renderItem={({item}) => {
                         return(
                             <View style={{flex:1, alignItems:"center"}}>
-                                <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id})}>
+                                <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id,pantalla})}>
                                     <Card style={{ width:width*0.85,alignContent:"center"}}>
                                         <CardItem style={{backgroundColor:'#1c2134'}}>
                                             <Left>

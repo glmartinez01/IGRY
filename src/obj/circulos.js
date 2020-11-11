@@ -44,7 +44,7 @@ export default function Donut({
       const strokeDashoffset = circumference - (circumference * maxPerc) / 100;
       if (inputRef?.current) {
         inputRef.current.setNativeProps({
-          text: `${Math.round(v.value)}`,
+          text: `${Math.round(v.value)}%`,
         });
       }
       if (circleRef?.current) {
@@ -96,7 +96,7 @@ export default function Donut({
         ref={inputRef}
         underlineColorAndroid="transparent"
         editable={false}
-        defaultValue="0"
+        defaultValue="0%"
         style={[
           StyleSheet.absoluteFillObject,
           { fontSize: radius / 2, color: textColor ?? color },
