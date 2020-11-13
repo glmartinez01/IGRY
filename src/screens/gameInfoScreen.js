@@ -6,7 +6,8 @@ import backend from "../api/backend";
 import { ceil, log } from "react-native-reanimated";
 import Circulos from "../obj/circulos"
 import { FlatList } from "react-native-gesture-handler";
-import Carousel from 'react-native-looped-carousel'
+import Carousel from 'react-native-looped-carousel';
+import { AntDesign } from '@expo/vector-icons';
 
 const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
@@ -129,7 +130,7 @@ const gameInfoScreen = ({route,navigation}) => {
                     </Card>
                 </ScrollView>
             <TouchableHighlight onPress={() => navigation.navigate(screenRoute)} style={styles.icono}>
-                <Image source={require("../../assets/fleshita.png")} style={styles.ImgIcon}/>
+                 <AntDesign name="leftcircle" size={30} style={{color:'#dde3ed',marginRight:5}}/>
             </TouchableHighlight>
             
         </Container>

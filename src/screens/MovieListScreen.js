@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Dimensions, FlatList, StyleSheet,Text, View,Image,Keyboard} from "react-native";
-import {Container,Header,Input,Item,Right,Icon,Left,Card,CardItem} from "native-base";
+import {Container,Header,Input,Item,Right,Icon,Left,Card,CardItem, Badge} from "native-base";
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -39,7 +39,7 @@ const MovieListScreen = ({navigation}) => {
 
     const getGames = async() => {
         try {
-            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;where rating >=90;`,{
+            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;search "mario";where rating >=90;`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
@@ -82,7 +82,7 @@ const MovieListScreen = ({navigation}) => {
     if(!games){
         return(
             <View style={{flex:1,justifyContent:"center", alignItems:"center", backgroundColor:'#ffffd1'}}>
-                <Image source = {require('../../assets/splash.gif')} style={{height: 200 }}/>
+                <Image source = {require('../../assets/pac.gif')} style={{height: 200 }}/>
             </View>
         )
     }
@@ -105,21 +105,24 @@ const MovieListScreen = ({navigation}) => {
                         style={{borderRadius:1}}
                         data={games}
                         keyExtractor={(item)=>item.id.toString()}
-                        ListEmptyComponent={<Text>No se han encontrado juegos!</Text>}
+                        ListEmptyComponent={<Text>No games found!</Text>}
 
                         renderItem={({item}) => {
                                 return(
                                     <View style={{flex:1, alignItems:"center"}}>
                                         <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id, pantalla})}>
                                             <Card style={styles.gallery}>
-                                                <CardItem style={{height:50,width:width*0.44,backgroundColor:'#1c2134',borderRadius:10}}>
-                                                    <Text style={{color:'#fff'}}>{item.name}</Text>
-                                                </CardItem>
-                                                <CardItem style={{backgroundColor:'#121521',borderRadius:10,flex:1}}>
+                                                <CardItem style={{backgroundColor:'#121521',borderRadius:10,flex:1,zIndex:-2}}>
                                                     <Image 
                                                         source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
-                                                        : require("../../assets/control1.png")} style={{flex:1,height:90,resizeMode:"contain"}}
+                                                        : require("../../assets/control1.png")} style={item.cover ? styles.gameCover : styles.ImageNotFound}
                                                     />
+                                                </CardItem>
+                                                <CardItem style={{height:50,backgroundColor:'#1c2134',borderRadius:10,width:width*0.45}}>
+                                                    <Text style={{color:'#fff'}}>{ ((item.name).length > 20) ? 
+                                                            (((item.name).substring(0,20-3)) + '...') : 
+                                                            item.name }
+                                                    </Text>
                                                 </CardItem>
                                             </Card>
                                         </TouchableOpacity>
@@ -145,9 +148,12 @@ const styles = StyleSheet.create({
     },
     gameCover:{
         
-        width: width*0.5,
-        height:height*0.5,
-        resizeMode:"contain",
+        flex:1,
+        height:185,
+        margin:-17,
+        marginTop:29,
+        borderRadius:10,
+        resizeMode:"cover"
         
     },
     searchInput:{
@@ -157,7 +163,7 @@ const styles = StyleSheet.create({
         marginRight:15
     },
     ImageNotFound:{
-        width : width*0.8,
+        width: width*0.2,
         height:height*0.5,
         resizeMode:"contain"
     },
@@ -179,7 +185,8 @@ const styles = StyleSheet.create({
         marginRight:20,
         marginTop:10,
         marginBottom:10,
-        alignItems:'center',
+        alignItems:'center'
+
     },
     
 })

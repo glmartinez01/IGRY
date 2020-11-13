@@ -149,7 +149,7 @@ const genresScreen = ({navigation}) => {
                         numColumns={2}
                         data={genres}
                         keyExtractor={(item)=>item.id}
-                        ListEmptyComponent={<Text>No se han encontrado generos!</Text>}
+                        ListEmptyComponent={<Text>No genres found!</Text>}
 
                         renderItem={({item}) => {
                             return(
