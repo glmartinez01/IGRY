@@ -115,7 +115,7 @@ const MovieListScreen = ({navigation}) => {
                                                 <CardItem style={{height:50,width:width*0.44,backgroundColor:'#1c2134',borderRadius:10}}>
                                                     <Text style={{color:'#fff'}}>{item.name}</Text>
                                                 </CardItem>
-                                                <CardItem style={{backgroundColor:'#121521',borderRadius:10}}>
+                                                <CardItem style={{backgroundColor:'#121521',borderRadius:10,flex:1}}>
                                                     <Image 
                                                         source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
                                                         : require("../../assets/control1.png")} style={{flex:1,height:90,resizeMode:"contain"}}
