@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {Dimensions, FlatList, StyleSheet,Text, View,Image,StatusBar,Keyboard} from "react-native";
-import { Spinner,Button, Container, Body,Header,Input,Item,Right,Icon,Left,Card,CardItem, H3, Thumbnail} from "native-base";
+import {Dimensions, FlatList, StyleSheet,Text, View,Image,Keyboard} from "react-native";
+import {Container,Header,Input,Item,Right,Icon,Left,Card,CardItem} from "native-base";
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
-import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
-import { color } from "react-native-reanimated";
+//import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+//import { color } from "react-native-reanimated";
+//import changeNavigationBarColor, { hideNavigationBar } from "react-native-navigation-bar-color";
 //import timeStamp from "../../timestamp";
 
 const pantalla = 1;
@@ -25,6 +26,16 @@ const MovieListScreen = ({navigation}) => {
     const [error,setError] = useState(false);
     const [search,setSearch] = useState("");
     const [searchError,setSearchError] = useState(false);
+
+    // const setNavigationColor = async () => {
+    //     try{
+    //         const response = await changeNavigationBarColor('translucent', true,false);
+    //         console.log(response)// {success: true}
+    //     }catch(e){
+    //         console.log(e)// {success: false}
+    //     }
+      
+    // }
 
     const getGames = async() => {
         try {
@@ -60,6 +71,7 @@ const MovieListScreen = ({navigation}) => {
     useEffect(()=>{
 
         getGames();
+        //setNavigationColor();
 
     },[])
 
@@ -76,12 +88,10 @@ const MovieListScreen = ({navigation}) => {
     }
 
     return( 
-       
+            
             <Container style={{backgroundColor:'#ffffd1'}}> 
                     
-                    <StatusBar hidden={true}/>
-                    
-                    <Header searchBar rounded style={{backgroundColor:'#1c2134'}}>
+                    <Header searchBar rounded style={{backgroundColor:'#1c2134'}} androidStatusBarColor={'#121521'}>
                         <Icon name="search" style={searchError ? {color:'#ff0000',marginTop:13} : {color:'#b9da00',marginTop:13}}/>
                         <Item style={{backgroundColor:'#121521',marginLeft:5}}>
                             <Input placeholder="Buscar" value={search} onChangeText={setSearch} placeholderTextColor={searchError?'#ff0000':'#b9da00'} style={{color:'#b9da00'}}/>
@@ -94,7 +104,7 @@ const MovieListScreen = ({navigation}) => {
                         numColumns={2}
                         style={{borderRadius:1}}
                         data={games}
-                        keyExtractor={(item)=>item.id}
+                        keyExtractor={(item)=>item.id.toString()}
                         ListEmptyComponent={<Text>No se han encontrado juegos!</Text>}
 
                         renderItem={({item}) => {

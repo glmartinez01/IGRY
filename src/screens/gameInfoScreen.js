@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {StyleSheet,Image,Dimensions,ScrollView,TouchableHighlight} from "react-native";
-import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container,Icon} from "native-base";
+import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container,Icon, Badge} from "native-base";
 import getEnvVars from "../../environment";
 import backend from "../api/backend";
 import { ceil, log } from "react-native-reanimated";
@@ -89,7 +89,7 @@ const gameInfoScreen = ({route,navigation}) => {
                 <ScrollView
                     vertical={true}
                     showsVerticalScrollIndicator={false}
-                    style={{flex:1, marginTop:0}}
+                    style={{flex:1}}
                 >
                     <Card style={styles.vertical}>
                         <Image source={game[0].cover ? ( {uri:`${apiImageUrl}${apiImageSize}${game[0].cover.image_id}.jpg`}): require("../../assets/control1.png") }
@@ -103,10 +103,14 @@ const gameInfoScreen = ({route,navigation}) => {
                         </CardItem>
                         <CardItem>
                             <Text style={{fontSize:19}}>Platforms: </Text>
-                            <View style={{ustifyContent:'flex-start',flexWrap:'wrap',alignSelf:'center', alignContent:'center'}}>
-                                {game[0].platforms ? game[0].platforms.map((element,key)=>(
-                                    <Text key={key}>{element.name}</Text>
-                                )):<Text>?</Text>} 
+                            <View style={{alignSelf:'center', alignContent:'center'}}>
+                                
+                                    {game[0].platforms ? game[0].platforms.map((element,key)=>(
+                                        <Badge key={key} style={{backgroundColor:'#b9da00'}}>
+                                            <Text >{element.name}</Text>
+                                        </Badge>
+                                    )):<Text>?</Text>} 
+                                
                             </View>
                         </CardItem>
                     </Card>

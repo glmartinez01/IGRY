@@ -56,7 +56,7 @@ const gamesbygenreScreen=({route,navigation})=>{
             <FlatList
                     style={{borderRadius:1}}
                     data={gamesgenre}
-                    keyExtractor={(item)=>item.id}
+                    keyExtractor={(item)=>item.id.toString()}
                     ListEmptyComponent={<Text>No se han encontrado juegos!</Text>}
 
                     renderItem={({item}) => {
