@@ -9,7 +9,6 @@ import gamesbygenreScreen from "./src/screens/gamesbygenreScreen";
 import {Image,Dimensions} from "react-native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import changeNavigationBarColor from "react-native-navigation-bar-color";
 
 
 const Tab = createBottomTabNavigator();

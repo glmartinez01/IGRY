@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {StyleSheet,View,Text,Dimensions, Image} from "react-native";
-import { Container, H1,Spinner,Card,CardItem,Body,H3,Thumbnail, Left, Button } from "native-base";
+import { Container, H1,Spinner,Card,CardItem,Body,H3,Thumbnail, Left, Button, Right } from "native-base";
 import backend from "../api/backend";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, ScrollView, TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import getEnvVars from "../../environment"
 
 const pantalla = 2;
@@ -47,39 +47,50 @@ const searchResults = ({route,navigation}) => {
 
     return(
         <Container style={{backgroundColor:'#353b52'}}>
+            <View style={{flex:0.50,zIndex:-2, position:'absolute'}}>
+                <Image source ={require("../../assets/wallpaper.png")} style={{height:height}}/>
+            </View>
+            <ScrollView>
+                {games.map((element,key)=>(
+                    ( key % 2 === 0 ) ?
+                    (<TouchableOpacity key={key} onPress={()=> navigation.navigate("gameInfoScreen",{name: element.name,id: element.id, pantalla})}>
+                        <Card style={styles.contenido}>
+                            <CardItem style={styles.contenido2}>
+                                <Left>
+                                    <Body style={{alignItems:"flex-start"}}>
+                                        <H3 style={{color:'#ffffff'}}>{element.name}</H3>
+                                    </Body>
+                                </Left>
+                                <Image 
+                                    source = { 
+                                    element.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${element.cover.image_id}.jpg`})
+                                    : require("../../assets/control1.png")}
+                                    style={element.cover ? styles.gameCover : styles.ImageNotFound}
+                                />
+                            </CardItem>
+                        </Card>
+                    </TouchableOpacity>)
+                :
+                    (<TouchableOpacity key={key} style={{backgroundcolor:'#000'}} onPress={()=> navigation.navigate("gameInfoScreen",{name: element.name,id: element.id, pantalla})}>
+                        <Card style={styles.contenido}>
+                            <CardItem style={styles.contenido2}>
+                                <Image 
+                                    source = { 
+                                    element.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${element.cover.image_id}.jpg`})
+                                    : require("../../assets/control1.png")}
+                                    style={element.cover ? styles.gameCover : styles.ImageNotFound}
+                                />
+                                <Left>
+                                    <Body style={{alignItems:"flex-start"}}>
+                                        <H3 style={{color:'#ffffff'}}>{element.name}</H3>
+                                    </Body>
+                                </Left>
+                            </CardItem>
+                        </Card>
+                    </TouchableOpacity>)
+                ))}
+            </ScrollView>
             
-            <FlatList 
-               
-               data={games}
-               keyExtractor={(item)=>item.id}
-               ListEmptyComponent=  {<View><Image source = {require('../../assets/tenor.gif')} style={{height:height, width:width}}/></View>}
-               //   !games.length>=1 ? alert('No se encontraron resultados!') : <View></View>
-               renderItem={({item}) =>{
-                   return(
-                        <View>
-                            <TouchableOpacity onPress ={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id,pantalla})}>
-                                <Card style={{borderColor:'black'}}>
-                                    <CardItem cardBody style={{flex:1,height:100,backgroundColor:'#1c2134'}}>
-                                            <Left>
-                                                <Thumbnail 
-                                                        source = { 
-                                                        item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
-                                                        : require("../../assets/control1.png")}
-                                                        style={item.cover ? styles.gameCover : styles.ImageNotFound}
-                                                />
-                                                <Body style={{alignItems:"flex-start"}}>
-                                                    <H3 style={{color:'#ffffff'}}>{item.name}</H3>
-                                                    
-                                                </Body>
-                                            </Left>
-                                    </CardItem>
-                                </Card>
-                            </TouchableOpacity>
-                        </View>
-                   )
-               }}
-            
-            />
 
         </Container>
         
@@ -91,14 +102,15 @@ const searchResults = ({route,navigation}) => {
 const styles = StyleSheet.create({
 
     gameCover:{
-        
-        width: 70,
-        height:70,
+        marginTop:'-20%',
+        borderRadius:10,
+        width: width*0.2,
+        height:height*0.2,
         resizeMode:"contain"
     },
     ImageNotFound:{
-        width : 70,
-        height: 50,
+        width :width*0.2,
+        height: height*0.09,
         resizeMode:"contain"
     },
     contentNotFound:{
@@ -108,8 +120,17 @@ const styles = StyleSheet.create({
         textAlign:"center",
         color:'#ffffff'
     },  
-
-
+    contenido:{
+        borderRadius:10,
+        flex:1,
+        marginTop:'10%',
+        marginLeft:'3%',
+        marginRight:'3%'
+    },
+    contenido2:{
+        backgroundColor:'#1c2134',
+        borderRadius:10
+    }
 });
 
 

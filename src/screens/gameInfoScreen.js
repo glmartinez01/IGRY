@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {StyleSheet,Image,Dimensions,ScrollView,TouchableHighlight} from "react-native";
-import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container,Icon, Badge} from "native-base";
+import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container,Icon, Badge, Button} from "native-base";
 import getEnvVars from "../../environment";
 import backend from "../api/backend";
 import { ceil, log } from "react-native-reanimated";
@@ -105,11 +105,17 @@ const gameInfoScreen = ({route,navigation}) => {
                             <Text style={{fontSize:19}}>Platforms: </Text>
                             <View style={{alignSelf:'center', alignContent:'center'}}>
                                 
-                                    {game[0].platforms ? game[0].platforms.map((element,key)=>(
-                                        <Badge key={key} style={{backgroundColor:'#b9da00'}}>
-                                            <Text >{element.name}</Text>
-                                        </Badge>
-                                    )):<Text>?</Text>} 
+                                {game[0].platforms ? game[0].platforms.map((element,key)=>(
+                                    <Badge key={key} style={{backgroundColor:'#b9da00'}}>
+                                        
+                                        <Text>{
+                                            element.name.includes('(') ? 
+                                            element.name.split('(')[1].substring(0,((element.name.split('(')[1]).length)-1) 
+                                            : element.name
+                                        }</Text>
+                                    
+                                    </Badge>
+                                )):<Text>?</Text>} 
                                 
                             </View>
                         </CardItem>
@@ -123,9 +129,7 @@ const gameInfoScreen = ({route,navigation}) => {
                     </Card>
                 </ScrollView>
             <TouchableHighlight onPress={() => navigation.navigate(screenRoute)} style={styles.icono}>
-                    <View>
-                        <Icon name="arrow-back" style={{color:"#fff",width:30}} />
-                    </View>
+                <Image source={require("../../assets/fleshita.png")} style={styles.ImgIcon}/>
             </TouchableHighlight>
             
         </Container>
@@ -167,7 +171,14 @@ const styles = StyleSheet.create({
         position:'absolute',
         marginLeft:10,
         marginTop:10,
+        borderRadius:10,
+        height:height*0.05,
         zIndex:2
+    },
+    ImgIcon:{
+        height:height*0.049,
+        width:width*0.099,
+        borderRadius:10,
     },
     vertical:{
         borderColor:'#fff',
