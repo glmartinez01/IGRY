@@ -39,8 +39,25 @@ const gameInfoScreen = ({route,navigation}) => {
             
         }
     }
+    const getArtWork = async () =>{
+        try {
+            try {
+                const response = await backend.get(`artwork/`,'fields *;',{
     
-
+                    headers:{   'Client-ID':`${apiKey}`,
+                                'Authorization':`${apiAuthorization}`},
+                     
+                    
+                            
+                });
+                //setGame(response.data);
+            } catch (error) {
+                //setError(true);
+            }
+        } catch (error) {
+            
+        }
+    }
     let screenRoute = "";
     if(pantalla===1){
         screenRoute = "gameList"
@@ -60,8 +77,8 @@ const gameInfoScreen = ({route,navigation}) => {
 
     if(!game){
         return(
-            <View style={styles.gif}>
-                <Image source = {require('../../assets/splash.gif')} style={{height: 200 }}/>
+            <View style={{flex:1,justifyContent:"center", alignItems:"center", backgroundColor:'#ffffd1'}}>
+                <Image source = {require('../../assets/mario2.gif')} style={{height: 250 }}/>
             </View>
         )
     }
@@ -146,12 +163,6 @@ const styles = StyleSheet.create({
         height:height*0.5,
         width:width*0.98,
     
-    },
-    gif:{
-        flex:1,
-        justifyContent:"center", 
-        alignItems:"center", 
-        backgroundColor:'#ffffd1'
     },
     carusel:{
         width: width,

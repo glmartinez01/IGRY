@@ -10,6 +10,9 @@ import { AntDesign } from '@expo/vector-icons';
 //import changeNavigationBarColor, { hideNavigationBar } from "react-native-navigation-bar-color";
 //import timeStamp from "../../timestamp";
 
+//Docs
+//https://stackoverflow.com/questions/30594080/how-to-have-ellipsis-effect-on-text
+
 const pantalla = 1;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
