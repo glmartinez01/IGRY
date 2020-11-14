@@ -50,6 +50,7 @@ const searchResults = ({route,navigation}) => {
             <View style={{flex:0.50,zIndex:-2, position:'absolute'}}>
                 <Image source ={require("../../assets/wallpaper.png")} style={{height:height}}/>
             </View>
+            {!games.length>=1 ? <View><Image source = {require('../../assets/tenor.gif')} style={{height:height, width:width}}/></View>:<View></View>}
             <ScrollView>
                 {games.map((element,key)=>(
                     ( key % 2 === 0 ) ?

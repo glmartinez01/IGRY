@@ -54,6 +54,7 @@ const gamesbygenreScreen=({route,navigation})=>{
 
         <Container style={{backgroundColor:'#ffffd1'}}>
             <FlatList
+                    numColumns={2}
                     style={{borderRadius:1}}
                     data={gamesgenre}
                     keyExtractor={(item)=>item.id.toString()}
@@ -62,43 +63,28 @@ const gamesbygenreScreen=({route,navigation})=>{
                     renderItem={({item}) => {
                         return(
                             <View style={{flex:1, alignItems:"center"}}>
-                                <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id,pantalla})}>
-                                    <Card style={{ width:width*0.85,alignContent:"center"}}>
-                                        <CardItem style={{backgroundColor:'#1c2134'}}>
-                                            <Left>
-                                                <Thumbnail source = {item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
-                                                            : require("../../assets/control1.png")}
-                                                            style={{resizeMode:'contain'}}
-                                                />
-                                                <Body>
-                                                    <H3 style={{color:'#ffffff'}}>{item.name}</H3>
-                                                </Body>
-                                            </Left>
-                                        </CardItem>
-                                        <CardItem cardBody >
-                                                <Body style={{alignItems:"center",backgroundColor:'#1c2134'}}>
-                                                    
-                                                    <Image 
-                                                        source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
-                                                        : require("../../assets/control1.png")}
-                                                        style={item.cover ? styles.gameCover : styles.ImageNotFound}
-                                                    />
-                                                    
-                                                    
-                                                </Body>
-                                            
-                                        </CardItem>
+                                <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id, pantalla})}>
+                                    <Card style={styles.gallery}>
+                                        <Image 
+                                            source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
+                                            : require("../../assets/control1.png")} style={item.cover ? styles.gameCover : styles.ImageNotFound}
+                                        />
+                                        <Text style={styles.texto}>
+                                            { ((item.name).length > 20) ? 
+                                            (((item.name).substring(0,20-3)) + '...') 
+                                            :item.name }
+                                        </Text>
                                     </Card>
                                 </TouchableOpacity>
                             </View>
                         )
                     }
-                    }
-                />
+                }
+            />
+
         </Container>
 
     );
-
 };
 
 const styles = StyleSheet.create({
@@ -111,11 +97,12 @@ const styles = StyleSheet.create({
         margin:15
     },
     gameCover:{
-        flex:1,
-        width: width*0.85,
-        height:height*0.5,
-        resizeMode:"contain",
-        
+        width:width*0.449,
+        height:height*0.2695,
+        borderRadius:10,
+        resizeMode:"cover",
+        zIndex:-2,
+        position:'absolute',
     },
     searchInput:{
         flex:1,
@@ -124,11 +111,46 @@ const styles = StyleSheet.create({
         marginRight:15
     },
     ImageNotFound:{
-        width : width*0.8,
-        height:height*0.5,
-        resizeMode:"contain"
+        flex:1,
+        height:height*0.2,
+        width: width*0.4,
+        borderRadius:10,
+        resizeMode:"contain",
+        zIndex:-2,
+        position:'absolute',
     },
-    
+    inputError:{
+        borderWidth : 2,
+        color:'#b9da00',
+        backgroundColor:'#121521',
+        marginLeft:5
+    },
+    gallery:{
+        borderColor:'#fff',
+        backgroundColor:'#121521',
+        borderWidth:3, 
+        borderRadius:10, 
+        height:height*0.27, 
+        width:width*0.45,
+        marginLeft:20,
+        marginRight:20,
+        marginTop:10,
+        marginBottom:10,
+        alignItems:'center',
+    },
+    texto:{
+        color:'#fff',
+        backgroundColor:'rgba(18,21,33,0.8)',
+        color:'#fff',
+        zIndex:-1,
+        position:'absolute',
+        top:'70%',
+        paddingTop:5,
+        paddingBottom:5,
+        paddingRight:5,
+        paddingLeft:5
+    },
+
 })
 
 export default gamesbygenreScreen;

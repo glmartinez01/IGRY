@@ -39,6 +39,8 @@ const gameInfoScreen = ({route,navigation}) => {
             
         }
     }
+    
+
     let screenRoute = "";
     if(pantalla===1){
         screenRoute = "gameList"
@@ -58,7 +60,7 @@ const gameInfoScreen = ({route,navigation}) => {
 
     if(!game){
         return(
-            <View style={{flex:1,justifyContent:"center", alignItems:"center", backgroundColor:'#ffffd1'}}>
+            <View style={styles.gif}>
                 <Image source = {require('../../assets/splash.gif')} style={{height: 200 }}/>
             </View>
         )
@@ -144,6 +146,12 @@ const styles = StyleSheet.create({
         height:height*0.5,
         width:width*0.98,
     
+    },
+    gif:{
+        flex:1,
+        justifyContent:"center", 
+        alignItems:"center", 
+        backgroundColor:'#ffffd1'
     },
     carusel:{
         width: width,

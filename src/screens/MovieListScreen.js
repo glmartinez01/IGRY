@@ -39,7 +39,7 @@ const MovieListScreen = ({navigation}) => {
 
     const getGames = async() => {
         try {
-            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;search "mario";where rating >=90;`,{
+            const response = await backend.post(`games/`,`fields name,rating,cover.*;limit 20;where rating >= 90;`,{
 
                 headers:{   'Client-ID':`${apiKey}`,
                             'Authorization':`${apiAuthorization}`}
@@ -94,7 +94,7 @@ const MovieListScreen = ({navigation}) => {
                     <Header searchBar rounded style={{backgroundColor:'#1c2134'}} androidStatusBarColor={'#121521'}>
                         <Icon name="search" style={searchError ? {color:'#ff0000',marginTop:13} : {color:'#b9da00',marginTop:13}}/>
                         <Item style={{backgroundColor:'#121521',marginLeft:5}}>
-                            <Input placeholder="Buscar" value={search} onChangeText={setSearch} placeholderTextColor={searchError?'#ff0000':'#b9da00'} style={{color:'#b9da00'}}/>
+                            <Input placeholder="Search" value={search} onChangeText={setSearch} placeholderTextColor={searchError?'#ff0000':'#b9da00'} style={{color:'#b9da00'}}/>
                             <AntDesign name="rightcircle" size={24} style={searchError?{color:'#ff0000',marginRight:5}:{color: '#b9da00',marginRight:5}} onPress={handlerSearch}/>
                         </Item>
                     </Header>
@@ -112,18 +112,15 @@ const MovieListScreen = ({navigation}) => {
                                     <View style={{flex:1, alignItems:"center"}}>
                                         <TouchableOpacity onPress={()=> navigation.navigate("gameInfoScreen",{name: item.name,id: item.id, pantalla})}>
                                             <Card style={styles.gallery}>
-                                                <CardItem style={{backgroundColor:'#121521',borderRadius:10,flex:1,zIndex:-2}}>
-                                                    <Image 
-                                                        source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
-                                                        : require("../../assets/control1.png")} style={item.cover ? styles.gameCover : styles.ImageNotFound}
-                                                    />
-                                                </CardItem>
-                                                <CardItem style={{height:50,backgroundColor:'#1c2134',borderRadius:10,width:width*0.45}}>
-                                                    <Text style={{color:'#fff'}}>{ ((item.name).length > 20) ? 
-                                                            (((item.name).substring(0,20-3)) + '...') : 
-                                                            item.name }
-                                                    </Text>
-                                                </CardItem>
+                                                <Image 
+                                                    source = { item.cover ? ( {uri:`${apiImageUrl}${apiImageSize}${item.cover.image_id}.jpg`})
+                                                    : require("../../assets/control1.png")} style={item.cover ? styles.gameCover : styles.ImageNotFound}
+                                                />
+                                                <Text style={styles.texto}>
+                                                    { ((item.name).length > 20) ? 
+                                                    (((item.name).substring(0,20-3)) + '...') 
+                                                    :item.name }
+                                                </Text>
                                             </Card>
                                         </TouchableOpacity>
                                     </View>
@@ -147,14 +144,12 @@ const styles = StyleSheet.create({
         margin:15
     },
     gameCover:{
-        
-        flex:1,
-        height:185,
-        margin:-17,
-        marginTop:29,
+        width:width*0.449,
+        height:height*0.2695,
         borderRadius:10,
-        resizeMode:"cover"
-        
+        resizeMode:"cover",
+        zIndex:-2,
+        position:'absolute',
     },
     searchInput:{
         flex:1,
@@ -163,9 +158,13 @@ const styles = StyleSheet.create({
         marginRight:15
     },
     ImageNotFound:{
-        width: width*0.2,
-        height:height*0.5,
-        resizeMode:"contain"
+        flex:1,
+        height:height*0.2,
+        width: width*0.4,
+        borderRadius:10,
+        resizeMode:"contain",
+        zIndex:-2,
+        position:'absolute',
     },
     inputError:{
         
@@ -185,8 +184,19 @@ const styles = StyleSheet.create({
         marginRight:20,
         marginTop:10,
         marginBottom:10,
-        alignItems:'center'
-
+        alignItems:'center',
+    },
+    texto:{
+        color:'#fff',
+        backgroundColor:'rgba(18,21,33,0.8)',
+        color:'#fff',
+        zIndex:-1,
+        position:'absolute',
+        top:'70%',
+        paddingTop:5,
+        paddingBottom:5,
+        paddingRight:5,
+        paddingLeft:5
     },
     
 })
