@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import {StyleSheet,Image,Dimensions,ScrollView,TouchableHighlight} from "react-native";
-import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container,Icon, Badge, Button} from "native-base";
+import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container,Icon, Badge, Button, Right, Row} from "native-base";
 import getEnvVars from "../../environment";
 import backend from "../api/backend";
 import { ceil, log } from "react-native-reanimated";
 import Circulos from "../obj/circulos"
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Carousel from 'react-native-looped-carousel';
 import { AntDesign } from '@expo/vector-icons';
+import GradientButton from 'react-native-gradient-buttons';
 
 const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 
-// https://github.com/phil-r/react-native-looped-carousel
+//Docs
+//https://github.com/phil-r/react-native-looped-carousel
+//https://reactnativeexample.com/a-customizable-and-haptic-gradient-button-library-for-react-native/
 
 const gameInfoScreen = ({route,navigation}) => {
 
@@ -23,7 +26,7 @@ const gameInfoScreen = ({route,navigation}) => {
     const getGameInfo = async () =>{
         try {
             try {
-                const response = await backend.get(`games/?fields=screenshots.*,summary,cover.*,rating,platforms.*&search=${name}`,{
+                const response = await backend.get(`games/?fields=id,screenshots.*,summary,cover.*,rating,platforms.*&search=${name}`,{
     
                     headers:{   'Client-ID':`${apiKey}`,
                                 'Authorization':`${apiAuthorization}`},
@@ -39,25 +42,7 @@ const gameInfoScreen = ({route,navigation}) => {
             
         }
     }
-    const getArtWork = async () =>{
-        try {
-            try {
-                const response = await backend.get(`artwork/`,'fields *;',{
     
-                    headers:{   'Client-ID':`${apiKey}`,
-                                'Authorization':`${apiAuthorization}`},
-                     
-                    
-                            
-                });
-                //setGame(response.data);
-            } catch (error) {
-                //setError(true);
-            }
-        } catch (error) {
-            
-        }
-    }
     let screenRoute = "";
     if(pantalla===1){
         screenRoute = "gameList"
@@ -147,6 +132,9 @@ const gameInfoScreen = ({route,navigation}) => {
                             </Text>
                         </CardItem>
                     </Card>
+                    <View style={{flex: 1, justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 24}}>
+                        <GradientButton text="ArtWorks" width='90%' blueMarine impact onPressAction={()=>navigation.navigate("artWorkScreen",{id:game[0].id,name:name})}/>
+                    </View>
                 </ScrollView>
             <TouchableHighlight onPress={() => navigation.navigate(screenRoute)} style={styles.icono}>
                  <AntDesign name="leftcircle" size={30} style={{color:'#dde3ed',marginRight:5}}/>
@@ -222,6 +210,20 @@ const styles = StyleSheet.create({
         marginBottom:10,
         alignItems:'center',
         justifyContent:'center',
+        flex:1
+    },
+    v2:{
+        borderColor:'#fff',
+        backgroundColor:'#fff',
+        borderWidth:3, 
+        borderRadius:10, 
+        marginLeft:20,
+        marginRight:20,
+        marginTop:20,
+        marginBottom:10,
+        alignItems:'center',
+        justifyContent:'center',
+        flexDirection:"row",
         flex:1
     },
 });

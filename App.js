@@ -6,6 +6,8 @@ import searchResults from "./src/screens/searchResults";
 import gameInfoScreen from "./src/screens/gameInfoScreen";
 import genresScreen from "./src/screens/genresScreen";
 import gamesbygenreScreen from "./src/screens/gamesbygenreScreen";
+import artWorkScreen from "./src/screens/gameArtworkScreen";
+import imageScreen from "./src/screens/imageScreen"
 import {Image,Dimensions} from "react-native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -126,6 +128,26 @@ export default function App(){
                 headerTitleAlign:"center"
               })
                 
+            }
+          />
+          <Stack.Screen name = "artWorkScreen" component = {artWorkScreen} options={
+              ({ route }) => ({
+                headerStyle:{
+                  backgroundColor:'#1c2134'},
+                  title: 'Artwork: ' + route.params.name,
+                  headerTintColor: "#fff",
+                  headerTitleAlign:"center"
+                })
+            }
+          />
+          <Stack.Screen name = "imageScreen" component = {imageScreen} options={
+              ({ route }) => ({
+                headerStyle:{
+                  backgroundColor:'#1c2134'},
+                  title: 'Image',
+                  headerTintColor: "#fff",
+                  headerTitleAlign:"center"
+                })
             }
           />
         </Stack.Navigator>
