@@ -26,7 +26,7 @@ class AnimatedImages extends Component{
 
 const artWorkScreen = ({route,navigation}) => {
 
-    const {id,name} = route.params;
+    const {id,name,screens} = route.params;
     const [artW,setArtW] = useState(null);
     const [error,setError] = useState(false);
 
@@ -72,7 +72,29 @@ const artWorkScreen = ({route,navigation}) => {
     return(
 
         <Container>
-            {!artW.length>=1 ? <View style={{flex:1,justifyContent:"center",alignItems:"center"}}><Text>No Artwork Found!</Text></View>
+            {!artW.length>=1 ? 
+            <FlatList
+            horizontal={false}
+            numColumns={3}
+            style={{borderRadius:1}}
+            data={screens}
+            keyExtractor={(item)=>item.id.toString()}
+            ListEmptyComponent={<Text>No images found!</Text>}
+
+            renderItem={({item}) => {
+                    return(
+                        <TouchableOpacity onPress={()=>navigation.navigate("simageScreen",{id:item.id})}>
+                            <AnimatedImages index={item.id}>
+                                
+                                <Image  source={{uri:`${apiImageUrl}${apiImageSize}${item.image_id}.jpg`}}
+                                        style={{height:height/3,width:width/3}}/>
+                                
+                            </AnimatedImages>
+                        </TouchableOpacity>
+                    )
+                }
+            }
+            />
             :
             <FlatList
                         horizontal={false}

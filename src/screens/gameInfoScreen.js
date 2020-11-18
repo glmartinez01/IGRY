@@ -132,9 +132,20 @@ const gameInfoScreen = ({route,navigation}) => {
                             </Text>
                         </CardItem>
                     </Card>
+                    {game[0].screenshots?
+                    
                     <View style={{flex: 1, justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 24}}>
-                        <GradientButton text="ArtWorks" width='90%' blueMarine impact onPressAction={()=>navigation.navigate("artWorkScreen",{id:game[0].id,name:name})}/>
+                        <GradientButton text="ArtWorks" width='90%' blueMarine impact onPressAction={()=>navigation.navigate("artWorkScreen",{id:game[0].id,name:name,screens:game[0].screenshots})}/>
                     </View>
+                    
+                    :
+                    
+                    <View style={{flex: 1, justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 24,opacity:0.5}}>
+                        <GradientButton text="ArtWorks" width='90%' blueMarine impact />
+                    </View>
+
+                    }
+                   
                 </ScrollView>
             <TouchableHighlight onPress={() => navigation.navigate(screenRoute)} style={styles.icono}>
                  <AntDesign name="leftcircle" size={30} style={{color:'#dde3ed',marginRight:5}}/>

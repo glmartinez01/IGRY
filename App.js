@@ -7,7 +7,8 @@ import gameInfoScreen from "./src/screens/gameInfoScreen";
 import genresScreen from "./src/screens/genresScreen";
 import gamesbygenreScreen from "./src/screens/gamesbygenreScreen";
 import artWorkScreen from "./src/screens/gameArtworkScreen";
-import imageScreen from "./src/screens/imageScreen"
+import imageScreen from "./src/screens/imageScreen";
+import simageScreen from "./src/screens/simageScreen";
 import {Image,Dimensions} from "react-native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -144,7 +145,17 @@ export default function App(){
               ({ route }) => ({
                 headerStyle:{
                   backgroundColor:'#1c2134'},
-                  title: 'Image',
+                  title: '',
+                  headerTintColor: "#fff",
+                  headerTitleAlign:"center"
+                })
+            }
+          />
+          <Stack.Screen name = "simageScreen" component = {simageScreen} options={
+              ({ route }) => ({
+                headerStyle:{
+                  backgroundColor:'#1c2134'},
+                  title: '',
                   headerTintColor: "#fff",
                   headerTitleAlign:"center"
                 })

@@ -4,6 +4,7 @@ import { Text,Dimensions,FlatList,Image } from "react-native";
 import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import GradientButton from 'react-native-gradient-buttons';
 import _, { map,findWhere, collect, find, findIndex} from 'underscore';
 
 const array = [
@@ -153,23 +154,13 @@ const genresScreen = ({navigation}) => {
 
                         renderItem={({item}) => {
                             return(
-                                <View>
-                                    <TouchableOpacity onPress={()=> navigation.navigate("gamesbygenreScreen",{id:item.id, name:item.name})}>
-                                        <Card style={{width:width*0.49,borderColor:'#000000',backgroundColor:'#0d4b56',borderRadius:10}}>
-                                            <CardItem style={{height:65,justifyContent:"center",alignItems:"center",backgroundColor:"#007a7c",borderRadius:10}}>
-                                                    <H3 style={{color:'#ffffff',fontSize:18}}>{item.name}</H3>
-                                            </CardItem>
-                                            <CardItem cardBody style={{backgroundColor:"#0d4b56",borderRadius:10}}>
-                                                <Body style={{justifyContent:"center",alignItems:"center"}}>
-                                                    <Image
-                                                        source={array[findIndex(array, {id:item.id} )].img}
-                                                        style={{height:50,resizeMode:'contain',margin:20}}
-                                                    />
-                                                </Body>
-                                            </CardItem>
-                                            
-                                        </Card>
-                                    </TouchableOpacity>
+                                <View style={{flex: 1, justifyContent: "space-evenly", alignItems: 'center', marginVertical: 10}}>    
+                                    <GradientButton gradientBegin="#007a7c" gradientEnd="#0d4b56" 
+                                                text={item.name.includes('(') ? 
+                                                item.name.split('(')[1].substring(0,((item.name.split('(')[1]).length)-1):((item.name).length > 15) ? 
+                                                (((item.name).substring(0,20-10)) + '...') 
+                                                :item.name} width='90%' impact onPressAction={()=> navigation.navigate("gamesbygenreScreen",{id:item.id, name:item.name})}/>
+                                    
                                 </View>
                             )
                         }
