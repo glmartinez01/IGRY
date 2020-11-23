@@ -11,7 +11,7 @@ Docs
 https://github.com/oblador/react-native-animatable
 */
 
-const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
+const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 
 class AnimatedImages extends Component{

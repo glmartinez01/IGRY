@@ -8,7 +8,7 @@ import Carousel from 'react-native-looped-carousel';
 import { AntDesign } from '@expo/vector-icons';
 import GradientButton from 'react-native-gradient-buttons';
 
-const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
+const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 
 /*
@@ -79,7 +79,7 @@ const gameInfoScreen = ({route,navigation}) => {
                             <Image 
                                 key={key} 
                                 style={styles.gameCover1} 
-                                source={{uri: `${apiImageUrl}${apiSSSize}${element.image_id}.jpg`}} 
+                                source={{uri: `${apiImageUrl}${apiImageSize}${element.image_id}.jpg`}} 
                             />
                         )): <Image source ={require("../../assets/control1.png")}style = {styles.ImageNotFound}/>}   
                     </Carousel>

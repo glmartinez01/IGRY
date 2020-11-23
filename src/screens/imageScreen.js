@@ -26,7 +26,7 @@ Doc para el toast, funciona para android y iphone pero el toastandroid se mira m
 https://docs.nativebase.io/Components.html#toast-def-headref
 */
 
-const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
+const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 
 const imageScreen = ({route,navigation}) => {
