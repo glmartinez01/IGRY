@@ -8,7 +8,11 @@ import getEnvVars from "../../environment"
 const pantalla = 2;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
-//https://reactnativecode.com/react-native-create-show-array-elements-text-using-map/
+
+/*
+Doc
+https://reactnativecode.com/react-native-create-show-array-elements-text-using-map/
+*/
 
 const searchResults = ({route,navigation}) => {
     const {search} = route.params;
@@ -91,11 +95,7 @@ const searchResults = ({route,navigation}) => {
                     </TouchableOpacity>)
                 ))}
             </ScrollView>
-            
-
         </Container>
-        
-
     )
 
 }
@@ -113,14 +113,7 @@ const styles = StyleSheet.create({
         width :width*0.2,
         height: height*0.09,
         resizeMode:"contain"
-    },
-    contentNotFound:{
-        flex:1,
-        justifyContent:"center",
-        alignItems:"center",
-        textAlign:"center",
-        color:'#ffffff'
-    },  
+    }, 
     contenido:{
         borderRadius:10,
         flex:1,

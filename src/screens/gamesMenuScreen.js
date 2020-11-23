@@ -5,23 +5,15 @@ import backend from "../api/backend";
 import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
-//import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
-//import { color } from "react-native-reanimated";
-//import changeNavigationBarColor, { hideNavigationBar } from "react-native-navigation-bar-color";
-//import timeStamp from "../../timestamp";
 
-//Docs
-//https://stackoverflow.com/questions/30594080/how-to-have-ellipsis-effect-on-text
+/*
+Docs
+https://stackoverflow.com/questions/30594080/how-to-have-ellipsis-effect-on-text
+*/
 
 const pantalla = 1;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
-//var ts = 1;//new Date().getTime();
-//const ts = Number(new Date());
-//var message = ts.toString()+privKey+apiKey;
-
-
-//Variable que contiene la pantalla renderizar
 
 const MovieListScreen = ({navigation}) => {
 
@@ -29,16 +21,6 @@ const MovieListScreen = ({navigation}) => {
     const [error,setError] = useState(false);
     const [search,setSearch] = useState("");
     const [searchError,setSearchError] = useState(false);
-
-    // const setNavigationColor = async () => {
-    //     try{
-    //         const response = await changeNavigationBarColor('translucent', true,false);
-    //         console.log(response)// {success: true}
-    //     }catch(e){
-    //         console.log(e)// {success: false}
-    //     }
-      
-    // }
 
     const getGames = async() => {
         try {
@@ -74,7 +56,6 @@ const MovieListScreen = ({navigation}) => {
     useEffect(()=>{
 
         getGames();
-        //setNavigationColor();
 
     },[])
 
@@ -138,11 +119,6 @@ const MovieListScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    },
     input:{
         margin:15
     },
@@ -154,12 +130,6 @@ const styles = StyleSheet.create({
         zIndex:-2,
         position:'absolute',
     },
-    searchInput:{
-        flex:1,
-        flexDirection:"row",
-        marginTop:10,
-        marginRight:15
-    },
     ImageNotFound:{
         flex:1,
         height:height*0.2,
@@ -168,13 +138,6 @@ const styles = StyleSheet.create({
         resizeMode:"contain",
         zIndex:-2,
         position:'absolute',
-    },
-    inputError:{
-        
-        borderWidth : 2,
-        color:'#b9da00',
-        backgroundColor:'#121521',
-        marginLeft:5
     },
     gallery:{
         borderColor:'#fff',

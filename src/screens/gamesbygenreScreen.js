@@ -6,7 +6,6 @@ import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 
-
 const pantalla = 3;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiUrl,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
@@ -17,7 +16,6 @@ const gamesbygenreScreen=({route,navigation})=>{
     const {id} = route.params;
     const [gamesgenre,setGamesGenre] = useState(null);
     const [error,setError] = useState(false);
-
 
     const getGamesGenres = async() => {
 
@@ -78,24 +76,13 @@ const gamesbygenreScreen=({route,navigation})=>{
                                 </TouchableOpacity>
                             </View>
                         )
-                    }
-                }
+                    }}
             />
-
         </Container>
-
     );
 };
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    input:{
-        margin:15
-    },
     gameCover:{
         width:width*0.449,
         height:height*0.2695,
@@ -103,12 +90,6 @@ const styles = StyleSheet.create({
         resizeMode:"cover",
         zIndex:-2,
         position:'absolute',
-    },
-    searchInput:{
-        flex:1,
-        flexDirection:"row",
-        marginTop:10,
-        marginRight:15
     },
     ImageNotFound:{
         flex:1,
@@ -118,12 +99,6 @@ const styles = StyleSheet.create({
         resizeMode:"contain",
         zIndex:-2,
         position:'absolute',
-    },
-    inputError:{
-        borderWidth : 2,
-        color:'#b9da00',
-        backgroundColor:'#121521',
-        marginLeft:5
     },
     gallery:{
         borderColor:'#fff',

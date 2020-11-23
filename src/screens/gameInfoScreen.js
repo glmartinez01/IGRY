@@ -3,9 +3,7 @@ import {StyleSheet,Image,Dimensions,ScrollView,TouchableHighlight} from "react-n
 import {Content, H3, Text,View,Spinner, Body, Header, Thumbnail, Card, CardItem, Left, Container,Icon, Badge, Button, Right, Row} from "native-base";
 import getEnvVars from "../../environment";
 import backend from "../api/backend";
-import { ceil, log } from "react-native-reanimated";
 import Circulos from "../obj/circulos"
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Carousel from 'react-native-looped-carousel';
 import { AntDesign } from '@expo/vector-icons';
 import GradientButton from 'react-native-gradient-buttons';
@@ -13,9 +11,11 @@ import GradientButton from 'react-native-gradient-buttons';
 const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 
-//Docs
-//https://github.com/phil-r/react-native-looped-carousel
-//https://reactnativeexample.com/a-customizable-and-haptic-gradient-button-library-for-react-native/
+/*
+Docs
+https://github.com/phil-r/react-native-looped-carousel
+https://reactnativeexample.com/a-customizable-and-haptic-gradient-button-library-for-react-native/
+*/
 
 const gameInfoScreen = ({route,navigation}) => {
 
@@ -29,10 +29,7 @@ const gameInfoScreen = ({route,navigation}) => {
                 const response = await backend.get(`games/?fields=id,screenshots.*,summary,cover.*,rating,platforms.*&search=${name}`,{
     
                     headers:{   'Client-ID':`${apiKey}`,
-                                'Authorization':`${apiAuthorization}`},
-                     
-                    
-                            
+                                'Authorization':`${apiAuthorization}`}, 
                 });
                 setGame(response.data);
             } catch (error) {
@@ -69,7 +66,6 @@ const gameInfoScreen = ({route,navigation}) => {
     }
     
 
-	
     return(
         <Container style={{flex:1, backgroundColor:'#ffffd1'}}>
             
@@ -157,12 +153,6 @@ const gameInfoScreen = ({route,navigation}) => {
 }
 
 const styles = StyleSheet.create({
-    header:{
-        flex:1,
-        height:height*0.5,
-        width:width*0.98,
-    
-    },
     carusel:{
         width: width,
         height:height*0.35,
@@ -194,11 +184,6 @@ const styles = StyleSheet.create({
         height:height*0.05,
         zIndex:2
     },
-    ImgIcon:{
-        height:height*0.049,
-        width:width*0.099,
-        borderRadius:10,
-    },
     vertical:{
         borderColor:'#fff',
         backgroundColor:'#fff',
@@ -221,20 +206,6 @@ const styles = StyleSheet.create({
         marginBottom:10,
         alignItems:'center',
         justifyContent:'center',
-        flex:1
-    },
-    v2:{
-        borderColor:'#fff',
-        backgroundColor:'#fff',
-        borderWidth:3, 
-        borderRadius:10, 
-        marginLeft:20,
-        marginRight:20,
-        marginTop:20,
-        marginBottom:10,
-        alignItems:'center',
-        justifyContent:'center',
-        flexDirection:"row",
         flex:1
     },
 });

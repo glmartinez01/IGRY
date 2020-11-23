@@ -1,7 +1,7 @@
 import React from "react";
 import {NavigationContainer,DrawerActions} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-import MovieListScreen from "./src/screens/MovieListScreen";
+import gamesMenuScreen from "./src/screens/gamesMenuScreen";
 import searchResults from "./src/screens/searchResults";
 import gameInfoScreen from "./src/screens/gameInfoScreen";
 import genresScreen from "./src/screens/genresScreen";
@@ -20,6 +20,7 @@ const Drawer = createDrawerNavigator();
 
 const {width, height} = Dimensions.get("window");
 
+/*
 function drawer(){
 
   return(
@@ -36,11 +37,9 @@ function drawer(){
           title:'Generos'
         }}/>
       </Drawer.Navigator>
-
-
   );
-
 }
+*/
 
 function MyTabs() {
   return (
@@ -54,9 +53,8 @@ function MyTabs() {
         labelStyle:{
           fontSize:15
         }
-
     }}>
-      <Tab.Screen name="gameList" component={MovieListScreen} options={{
+      <Tab.Screen name="gameList" component={gamesMenuScreen} options={{
           title:'Games',
           tabBarIcon:({color,size}) =>(
             <Image source={require("./assets/tab1.png")} style={{height:30,width:25}}/>
@@ -76,12 +74,8 @@ function MyTabs() {
 
 
 export default function App(){
-
-  
   return (
-    
       <NavigationContainer>
-        
         <Stack.Navigator>
           <Stack.Screen name = "Home" component={MyTabs} options={
             

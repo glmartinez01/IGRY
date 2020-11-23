@@ -1,7 +1,8 @@
-
-//  https://docs.expo.io/versions/latest/sdk/svg/
-//  https://www.youtube.com/watch?v=x2LtzCxbWI0
-
+/*
+Docs
+https://docs.expo.io/versions/latest/sdk/svg/
+https://www.youtube.com/watch?v=x2LtzCxbWI0
+*/
 import * as React from 'react';
 import {Easing,TextInput,Animated,Text,View,StyleSheet,} from 'react-native';
 import Svg, { G, Circle, Rect } from 'react-native-svg';

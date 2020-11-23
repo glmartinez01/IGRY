@@ -6,8 +6,10 @@ import backend from "../api/backend";
 import * as Animatable from 'react-native-animatable';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-//docs
-//https://github.com/oblador/react-native-animatable
+/*
+Docs
+https://github.com/oblador/react-native-animatable
+*/
 
 const {apiKey,apiAuthorization,apiImageUrl,apiSSSize,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
@@ -40,18 +42,10 @@ const artWorkScreen = ({route,navigation}) => {
                             
             });
             setArtW(response.data);
-            // const source_array = artW.map(function(element){
-            //     return `${apiImageUrl}${apiImageSize}${element.image_id}.jpg`
-            // });
            
-
-            
         } catch (error) {
             setError(true);
-            
         }
-
-        
         
     }
 
@@ -70,8 +64,7 @@ const artWorkScreen = ({route,navigation}) => {
     }
 
     return(
-
-        <Container>
+        <Container style={{backgroundColor:'#ffffd1'}}>
             {!artW.length>=1 ? 
             <FlatList
             horizontal={false}
@@ -117,16 +110,11 @@ const artWorkScreen = ({route,navigation}) => {
                                 )
                             }
                         }
-
-
-
             />
             }
             
         </Container>
-
     );
-
 }
 
 
