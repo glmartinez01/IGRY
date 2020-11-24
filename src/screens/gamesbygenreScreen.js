@@ -56,7 +56,13 @@ const gamesbygenreScreen=({route,navigation})=>{
                     style={{borderRadius:1}}
                     data={gamesgenre}
                     keyExtractor={(item)=>item.id.toString()}
-                    ListEmptyComponent={<Text>No games found!</Text>}
+                    ListEmptyComponent={
+                        <View style={{justifyContent: "center", alignItems: "center", height: height}}>
+                            <Text style={{justifyContent: "center", alignItems: "center", fontSize: 20,}}>
+                            No games found!
+                            </Text>
+                        </View>
+                    }
 
                     renderItem={({item}) => {
                         return(

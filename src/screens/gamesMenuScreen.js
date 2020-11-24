@@ -6,11 +6,6 @@ import getEnvVars from "../../environment";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 
-/*
-Docs
-https://stackoverflow.com/questions/30594080/how-to-have-ellipsis-effect-on-text
-*/
-
 const pantalla = 1;
 const {width, height} = Dimensions.get("window");
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
@@ -89,7 +84,13 @@ const MovieListScreen = ({navigation}) => {
                         style={{borderRadius:1}}
                         data={games}
                         keyExtractor={(item)=>item.id.toString()}
-                        ListEmptyComponent={<Text>No games found!</Text>}
+                        ListEmptyComponent={
+                            <View style={{justifyContent: "center", alignItems: "center", height: height}}>
+                                <Text style={{justifyContent: "center", alignItems: "center", fontSize: 20,}}>
+                                No games found!
+                                </Text>
+                            </View>
+                        }
 
                         renderItem={({item}) => {
                                 return(

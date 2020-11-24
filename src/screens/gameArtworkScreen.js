@@ -6,11 +6,6 @@ import backend from "../api/backend";
 import * as Animatable from 'react-native-animatable';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-/*
-Docs
-https://github.com/oblador/react-native-animatable
-*/
-
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 

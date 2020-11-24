@@ -12,20 +12,6 @@ import * as MediaLibrary from 'expo-media-library';
 import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
 
-/*
-Docs para descargar las imagenes
-https://stackoverflow.com/questions/51353224/downloading-a-file-with-expo-why-is-this-so-hard
-
-Doc para auto escalar la imagen
-https://www.skptricks.com/2018/11/react-native-responsive-image-scale-to-fit-example.html
-
-Doc para las notificaciones(solo android)
-https://docs.expo.io/versions/latest/react-native/toastandroid/
-
-Doc para el toast, funciona para android y iphone pero el toastandroid se mira mejor en android
-https://docs.nativebase.io/Components.html#toast-def-headref
-*/
-
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 

@@ -24,13 +24,11 @@ const genresScreen = ({navigation}) => {
                         
             });
             setGenres(response.data);
-            
 
         } catch (error) {
             setError(true);
             {console.log(error)};
         }
-        
     }
 
     useEffect(()=>{

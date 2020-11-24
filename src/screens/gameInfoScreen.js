@@ -11,12 +11,6 @@ import GradientButton from 'react-native-gradient-buttons';
 const {apiKey,apiAuthorization,apiImageUrl,apiImageSize} = getEnvVars();
 const {width, height} = Dimensions.get("window");
 
-/*
-Docs
-https://github.com/phil-r/react-native-looped-carousel
-https://reactnativeexample.com/a-customizable-and-haptic-gradient-button-library-for-react-native/
-*/
-
 const gameInfoScreen = ({route,navigation}) => {
 
     const {name,id,pantalla} = route.params;
@@ -131,13 +125,13 @@ const gameInfoScreen = ({route,navigation}) => {
                     {game[0].screenshots?
                     
                     <View style={{flex: 1, justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 24}}>
-                        <GradientButton text="ArtWorks" width='90%' blueMarine impact onPressAction={()=>navigation.navigate("artWorkScreen",{id:game[0].id,name:name,screens:game[0].screenshots})}/>
+                        <GradientButton gradientBegin="#007a7c" gradientEnd="#0d4b56" text="ArtWorks" width='90%' impact onPressAction={()=>navigation.navigate("artWorkScreen",{id:game[0].id,name:name,screens:game[0].screenshots})}/>
                     </View>
                     
                     :
                     
                     <View style={{flex: 1, justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 24,opacity:0.5}}>
-                        <GradientButton text="ArtWorks" width='90%' blueMarine impact />
+                        <GradientButton gradientBegin="#007a7c" gradientEnd="#0d4b56"  text="ArtWorks" width='90%' impact />
                     </View>
 
                     }
